@@ -1,33 +1,31 @@
 ---
 name: qivi-showcase-design
-description: Design and refine the Qivi particle-avatar showcase, its conversation layout, character drawer, live settings, responsive behavior, and interaction motion. Use for visual work in the Qivi repository, not unrelated Qivi subprojects.
+description: Structure, sections, and product invariants of the Qivi showcase (Chat, Scenes, Characters, Studio, Build). Use when adding or changing showcase sections, scenes, characters, studio controls, or avatar behavior in the Qivi repository, not unrelated Qivi subprojects.
 ---
 
 # Qivi showcase design
 
-Treat the avatar as the product: the interface gives it space and makes its behavior easy to try. Read `AGENTS.md` and inspect current components before changing the layout.
+Treat the avatar as the product: the interface gives it space and makes its behavior easy to try. Read `AGENTS.md`, then `.agents/skills/qivi-ui-ux-mobile/SKILL.md` for visual language, mobile, keyboard, and motion rules.
 
-## Visual direction
+## Structure
 
-Prefer a spacious live stage beside a quiet conversation area. Let the avatar sit directly on the page; avoid a filled box behind it. Map character, playground, and example dialog surfaces to the same canvas token, with a subtle theme-aware backdrop tint. On phones, place a compact live stage above the conversation and keep its composer within the visual viewport. Use flat, opaque surfaces and a cool palette; avoid decorative gradient washes, glass controls, repetitive rounded feature cards, and marketing text that competes with the avatar.
-
-The current palette uses porcelain `#f5f7fc`, white `#ffffff`, ink `#17254a`, blue `#345de3`, muted slate `#596783`, and particle coral `#f2453a`. Map these through semantic tokens, with opaque navy surfaces in dark mode. Keep Outfit as the interface typeface and the existing Qivi wordmark. Make hierarchy through scale, spacing, and alignment rather than ornamental labels.
+- `src/App.tsx`: header with segmented navigation on desktop, bottom tab bar on phones, hash routes (`#/chat`, `#/scenes/<id>`, `#/characters`, `#/studio`, `#/build`), lazy-loaded sections.
+- `src/store.tsx`: one persisted look (character, personality, palette, shape, mood, rendering) and theme. Every primary avatar reads it through `useLookProps()`, so a change in Studio or Characters appears everywhere.
+- **Chat** (`pages/ChatPage.tsx`): hero avatar driven by `useQiviAgent`, prompts, streaming replies, mic and read-aloud, reactions, quick character switcher, and a Live controls sheet (placement stage/composer/corner, state and expression overrides, particles, reduced motion, doze).
+- **Scenes** (`pages/ScenesPage.tsx` + `scenes/`): each scene is a working mini-product with its code pattern. Register new scenes in `SCENES` with an illustration in `SceneArt`.
+- **Characters**: swipe carousel; one morphing avatar is drawn above the scroll track so particles are never clipped.
+- **Studio**: identity, mood, shape, render, and generated JSX (`lookToJsx`).
+- **Build**: install, integration snippets, real banner captures, downloads, GitHub and Sponsor links.
 
 ## Product invariants
 
 - Keep live particle previews and distinct character shapes, gaze, breathing, and particle behaviors. Small icons alone do not demonstrate character differences.
-- Open character selection as a carousel drawer with swipe, arrows, dots, a clear selection action, and the currently selected character restored on reopening.
-- Settings update the avatar live. Keep detailed configuration in the settings sidebar or playground rather than the main stage.
-- Preserve system/saved themes, general chat demo prompts, honest sample-response labeling, project links, voice controls, and access to examples and documentation.
-- Give chat its own scroll area. Fade content with a mask so the actual surface shows through, and preserve reading position while replies stream.
-- Avoid rendering hidden WebGL previews. Mount previews on demand and release them on close; keep animation in the library engine rather than frame-by-frame React state.
-
-## Interaction and mobile
-
-Use a consistent motion vocabulary: short color/press feedback, slightly longer drawer travel, and damped avatar morphs. Keep content stable while replies stream. Animate action outcomes rather than adding unsolicited loops. Respect reduced motion in both CSS and the avatar engine.
-
-Preserve native dialog focus behavior, keyboard navigation, descriptive accessible names, and at least 44px touch targets. At short viewport heights, reduce the avatar stage before squeezing the composer. Use visualViewport height to respond to software keyboards; never disable zoom.
+- Never clip avatar haze: avoid `overflow: hidden` or scroll containers around live avatars; content scrolls beneath a fading header.
+- Use `layer="viewport"` only when the avatar must travel or stream particles; give its box no layout space.
+- Preserve system/saved theme, honest sample-response and synthetic-data labels, project links, voice controls, and access to documentation.
+- Chat keeps its own scroll area with fade masks and preserves reading position while replies stream.
+- Mount WebGL previews only when visible and release voices, performances, audio, and object URLs on unmount.
 
 ## Verification
 
-Run avatar commands from the repository root. Typecheck and build after code changes. Review rendered screenshots in light and dark mode, including 320px phone, a standard phone, tablet, short landscape, and desktop. Verify prompts/chat, scrolling, keyboard focus, theme persistence, character selection, drawer dismissal, live settings, and playground access. Confirm the composer and dialog actions remain visible with no page-level horizontal overflow. Run library tests when changing profiles or engine behavior.
+Typecheck and `npm run build:showcase`. Review rendered screenshots in light and dark at 320px, a standard phone, tablet, short landscape, and desktop. Exercise chat, keyboard-open composer, every scene's primary flow, character selection, studio changes reflected in chat, sheets, and theme persistence. Run library tests when changing profiles or engine behavior.

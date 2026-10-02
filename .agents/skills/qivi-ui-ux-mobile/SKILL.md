@@ -1,11 +1,11 @@
 ---
 name: qivi-ui-ux-mobile
-description: UI/UX, interaction, motion, and mobile-first design rules for Qivi interfaces, including the redesigned showcase in src/next. Use when designing or reviewing screens, layouts, navigation, sheets, forms, chat composers, phone keyboards, touch targets, safe areas, animation, iconography, or responsive behavior in the Qivi repository.
+description: UI/UX, interaction, motion, and mobile-first design rules for Qivi interfaces, including the showcase in src/. Use when designing or reviewing screens, layouts, navigation, sheets, forms, chat composers, phone keyboards, touch targets, safe areas, animation, iconography, or responsive behavior in the Qivi repository.
 ---
 
 # Qivi UI/UX and mobile design
 
-Read `AGENTS.md` first. The avatar is the product; every screen exists to show what `QiviAvatar` can do in a real product context. For the original showcase (`src/App.tsx`), also follow `.agents/skills/qivi-showcase-design/SKILL.md`. The redesigned showcase lives in `src/next/` and is served at `/next/`.
+Read `AGENTS.md` first. The avatar is the product; every screen exists to show what `QiviAvatar` can do in a real product context. For the showcase's sections and invariants, also follow `.agents/skills/qivi-showcase-design/SKILL.md`.
 
 ## Design process
 
@@ -21,7 +21,7 @@ Read `AGENTS.md` first. The avatar is the product; every screen exists to show w
 - Typeface: Outfit. Hierarchy comes from size, weight, spacing, and alignment. Display 32–56px light weight with tight tracking; body 15–16px; captions 12–13px. Never body text below 15px on phones; inputs are always 16px or larger (prevents iOS focus zoom).
 - Keep the `Qivi.` wordmark with the coral dot, transparent on the page background.
 - Imagery: compose illustrations from `QiviIcon` faces plus simple SVG UI fragments (bars, fields, waveforms, timelines). Do not use stock photos, AI-generated images, or illustrations that misrepresent the real avatar.
-- Icons: one consistent 24px stroke set (1.75px stroke, round caps/joins) from `src/next/icons.tsx`. Every icon-only control has an accessible name and a tooltip on pointer devices.
+- Icons: one consistent 24px stroke set (1.75px stroke, round caps/joins) from `src/icons.tsx`. Every icon-only control has an accessible name and a tooltip on pointer devices.
 - Surfaces: flat and opaque, 1px `--line` borders, radius 12/16/24. A soft, theme-aware radial spotlight behind the hero avatar is allowed; avoid glassmorphism and decorative gradient washes elsewhere.
 - Spacing scale: 4, 8, 12, 16, 24, 32, 48, 64. Phone side gutter is 16px.
 
@@ -36,7 +36,7 @@ Read `AGENTS.md` first. The avatar is the product; every screen exists to show w
 ## Phone keyboard (required for every text input)
 
 - Viewport meta: `width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content`. Never disable zoom.
-- Track `window.visualViewport` (`height`, `offsetTop`) in one hook (`src/next/useViewport.ts`). Write `--vvh` and `--vv-top` CSS variables and set `data-keyboard="open"` on `<html>` when an editable element is focused and the visual viewport shrank by more than 150px from the orientation baseline.
+- Track `window.visualViewport` (`height`, `offsetTop`) in one hook (`src/useViewport.ts`). Write `--vvh` and `--vv-top` CSS variables and set `data-keyboard="open"` on `<html>` when an editable element is focused and the visual viewport shrank by more than 150px from the orientation baseline.
 - When the keyboard is open: hide the bottom tab bar, collapse the hero avatar into a compact header (avatar ~56px + status), keep the composer flush above the keyboard, and keep the newest message visible. Do not move focus or scroll the page programmatically beyond keeping the chat pinned to its latest message.
 - Composer: 16px+ font, `enterkeyhint="send"`, `autocomplete="off"`, sentence autocapitalization, auto-growing textarea capped at ~5 lines, Enter sends and Shift+Enter inserts a newline on hardware keyboards. Send stays disabled for empty input and remains reachable with the keyboard open.
 - Forms: correct `type`, `inputmode`, `autocomplete`, and `enterkeyhint` per field; labels stay visible (no placeholder-only labels); errors appear inline, are announced (`aria-live`), and never sit under the keyboard.

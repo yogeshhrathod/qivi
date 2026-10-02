@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { EXPRESSIONS, QiviAvatar, QiviIcon, STATES, type QiviAvatarHandle, type QiviExpression, type QiviImpulse, type QiviState } from '@yogeshhrathod/qivi';
+import { EXPRESSIONS, QiviAvatar, QiviIcon, STATES, type QiviAvatarHandle, type QiviExpression, type QiviImpulse, type QiviState } from 'qivi';
 import { Icon, type IconName } from '../icons';
 import { useLookProps } from '../store';
 import { Segmented, Slider } from '../ui';

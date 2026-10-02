@@ -1,5 +1,5 @@
 import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from 'react';
-import { CHARACTERS, QiviIcon, type QiviExpression, type QiviState } from '@yogeshhrathod/qivi';
+import { CHARACTERS, QiviIcon, type QiviExpression, type QiviState } from 'qivi';
 import { Icon, type IconName } from '../icons';
 import { href } from '../router';
 import { useStore } from '../store';

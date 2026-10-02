@@ -21,9 +21,7 @@
 
 **Public API:** update implementation, `types.ts` where relevant, exports in `index.ts`, and API/example documentation. `library/qivi/tests/docs.test.mjs` typechecks documented TSX examples against the built package.
 
-**Showcase UI:** follow current semantic tokens and interface typography. Keep the avatar prominent and conversation controls stable. If character drawers, settings panels, or dialogs exist, preserve their state, keyboard behavior, and resource cleanup. On phones, reduce the avatar stage before squeezing the composer. Use opaque theme surfaces and transparent branding; avoid a fixed white wordmark background.
-
-**Redesigned showcase:** `src/next/` builds alongside the current showcase as a second Vite entry (`next/index.html` → `/next/`, or `/qivi/next/` on Pages). Follow `.agents/skills/qivi-ui-ux-mobile/SKILL.md`: one hero avatar per view, visual-viewport keyboard handling in `useViewport.ts`, sheets via native `<dialog>`, and scene patterns in `src/next/scenes/`. When it replaces the current showcase, move its entry to `index.html` and remove the old components.
+**Showcase UI:** follow `.agents/skills/qivi-ui-ux-mobile/SKILL.md` and the semantic tokens in `src/styles.css`. Keep one hero avatar per view, the shared look in `src/store.tsx`, and sheets on native `<dialog>`. New product scenarios go in `src/scenes/` and are registered in `src/pages/ScenesPage.tsx`. On phones, reduce the avatar stage before squeezing the composer; `src/useViewport.ts` handles software keyboards. Use transparent branding; avoid a fixed white wordmark background.
 
 **Branding:** use `QiviIcon` for the avatar mark and the Qivi wordmark with coral dot. Capture real avatars from `scripts/brand-preview.html`; preserve transparent light/dark banners and README `<picture>` selection. See [capture details](assets/README.md).
 

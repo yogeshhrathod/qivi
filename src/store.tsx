@@ -3,7 +3,7 @@ import {
   BASE, CHARACTERS, createRadialShape,
   type ExpressionDef, type QiviAvatarProps, type QiviCharacter, type QiviImpulse, type QiviPersonality,
   type QiviPresentation, type QiviShape, type QiviThemeName,
-} from '@yogeshhrathod/qivi';
+} from 'qivi';
 
 export type CharacterKey = keyof typeof CHARACTERS;
 export const CHARACTER_KEYS = Object.keys(CHARACTERS) as CharacterKey[];
@@ -113,7 +113,7 @@ export function lookToJsx(look: Look): string {
     ? `\nconst character = {\n  ...CHARACTERS.${look.character},\n  name: "${look.name}",\n  presentation: "${look.presentation}",\n  params: { ...CHARACTERS.${look.character}.params, spacing: ${look.spacing}, width: ${look.width} },\n  behavior: { ...CHARACTERS.${look.character}.behavior, blink: [${look.blink}, ${look.blink + 1.5}] },\n};\n`
     : '';
   if (changedIdentity) props[0] = 'character={character}';
-  return `import { ${imports.join(', ')} } from "@yogeshhrathod/qivi";\nimport "@yogeshhrathod/qivi/styles.css";\n${character}\n<QiviAvatar\n  ${props.join('\n  ')}\n  state="idle"\n/>`;
+  return `import { ${imports.join(', ')} } from "qivi";\nimport "qivi/styles.css";\n${character}\n<QiviAvatar\n  ${props.join('\n  ')}\n  state="idle"\n/>`;
 }
 
 interface Store {
@@ -128,8 +128,8 @@ interface Store {
 }
 
 const StoreContext = createContext<Store | null>(null);
-const LOOK_KEY = 'qivi-next-look';
-const THEME_KEY = 'qivi-next-theme';
+const LOOK_KEY = 'qivi-look';
+const THEME_KEY = 'qivi-theme-mode';
 
 function readLook(): Look {
   try {

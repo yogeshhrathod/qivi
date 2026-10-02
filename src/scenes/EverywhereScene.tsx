@@ -1,4 +1,4 @@
-import { CHARACTERS, QiviAvatar, QiviIcon, type QiviAvatarProps, type QiviExpression } from '@yogeshhrathod/qivi';
+import { CHARACTERS, QiviAvatar, QiviIcon, type QiviAvatarProps, type QiviExpression } from 'qivi';
 import { Icon } from '../icons';
 import { useStore } from '../store';
 

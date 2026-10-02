@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { EXPRESSIONS, PALETTES, PERSONALITIES, STATES } from '@yogeshhrathod/qivi';
-import llms from '../../../library/qivi/llms.txt?raw';
-import guide from '../../../library/qivi/docs/performance.md?raw';
-import bannerLight from '../../../docs/assets/qivi-banner-light.png';
-import bannerDark from '../../../docs/assets/qivi-banner-dark.png';
+import { EXPRESSIONS, PALETTES, PERSONALITIES, STATES } from 'qivi';
+import llms from '../../library/qivi/llms.txt?raw';
+import guide from '../../library/qivi/docs/performance.md?raw';
+import bannerLight from '../../docs/assets/qivi-banner-light.png';
+import bannerDark from '../../docs/assets/qivi-banner-dark.png';
 import { Icon, type IconName } from '../icons';
 import { href } from '../router';
 import { useStore } from '../store';
 import { CodeBlock, PageHeader, Segmented } from '../ui';
 
-const INSTALL = 'npm install @yogeshhrathod/qivi react@^19 react-dom@^19 three@^0.180';
+const INSTALL = 'npm install qivi react@^19 react-dom@^19 three@^0.180';
 const SNIPPETS = {
-  start: { label: 'Quick start', code: `import { QiviAvatar } from "@yogeshhrathod/qivi";\nimport "@yogeshhrathod/qivi/styles.css";\n\nexport function Companion() {\n  return <QiviAvatar size={160} personality="core" state="idle" />;\n}` },
+  start: { label: 'Quick start', code: `import { QiviAvatar } from "qivi";\nimport "qivi/styles.css";\n\nexport function Companion() {\n  return <QiviAvatar size={160} personality="core" state="idle" />;\n}` },
   agent: { label: 'Chat agent', code: `// Map your backend's progress to avatar states.\nconst [state, setState] = useState<QiviState>("idle");\n\nasync function ask(question: string, signal: AbortSignal) {\n  setState("thinking");\n  for await (const event of yourBackend(question, signal)) {\n    if (event.type === "progress") setState(event.phase); // searching, analyzing…\n    if (event.type === "token") setState("answering");\n  }\n  setState("success");\n}\n\n<QiviAvatar state={state} expression={state === "error" ? "concern" : undefined} />` },
-  voice: { label: 'Voice', code: `import { QiviAvatar, QiviVoice } from "@yogeshhrathod/qivi";\n\n// Microphone: call from a click handler.\nconst mic = await QiviVoice.microphone();\n<QiviAvatar state="listening" voice={mic} />\n\n// Your TTS audio: mouth follows the real waveform.\nconst audio = new Audio(ttsUrl);\nconst voice = QiviVoice.fromMediaElement(audio);\n<QiviAvatar state="talking" voice={voice} />\nawait audio.play();\n// dispose() when finished` },
-  character: { label: 'Character', code: `import { QiviAvatar, CHARACTERS, type QiviCharacter } from "@yogeshhrathod/qivi";\n\nconst Pip: QiviCharacter = {\n  ...CHARACTERS.qivi,\n  name: "Pip",\n  personality: "spark",\n  theme: { deep: "#0f3b2e", mid: "#1f9d74", pale: "#b9f0d8",\n           warm: "#ffc04d", hi: "#fff0b8", accent: "#ff8a3d" },\n  params: { width: 0.96, spacing: 0.9 },\n};\n\n<QiviAvatar character={Pip} expression="excited" />` },
+  voice: { label: 'Voice', code: `import { QiviAvatar, QiviVoice } from "qivi";\n\n// Microphone: call from a click handler.\nconst mic = await QiviVoice.microphone();\n<QiviAvatar state="listening" voice={mic} />\n\n// Your TTS audio: mouth follows the real waveform.\nconst audio = new Audio(ttsUrl);\nconst voice = QiviVoice.fromMediaElement(audio);\n<QiviAvatar state="talking" voice={voice} />\nawait audio.play();\n// dispose() when finished` },
+  character: { label: 'Character', code: `import { QiviAvatar, CHARACTERS, type QiviCharacter } from "qivi";\n\nconst Pip: QiviCharacter = {\n  ...CHARACTERS.qivi,\n  name: "Pip",\n  personality: "spark",\n  theme: { deep: "#0f3b2e", mid: "#1f9d74", pale: "#b9f0d8",\n           warm: "#ffc04d", hi: "#fff0b8", accent: "#ff8a3d" },\n  params: { width: 0.96, spacing: 0.9 },\n};\n\n<QiviAvatar character={Pip} expression="excited" />` },
 } as const;
 type SnippetKey = keyof typeof SNIPPETS;
 
@@ -78,6 +78,6 @@ export function BuildPage() {
       </div>
     </section>
 
-    <footer className="nx-footer"><span>Qivi is maintained by <a href="https://github.com/yogeshhrathod" target="_blank" rel="noopener noreferrer">Yogesh Rathod</a>.</span><a href="../">Classic showcase</a></footer>
+    <footer className="nx-footer"><span>Qivi is maintained by <a href="https://github.com/yogeshhrathod" target="_blank" rel="noopener noreferrer">Yogesh Rathod</a>.</span></footer>
   </div>;
 }

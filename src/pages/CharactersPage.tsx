@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { CHARACTERS, PALETTES, PERSONALITIES, QiviAvatar, QiviIcon, type QiviThemeName } from '@yogeshhrathod/qivi';
+import { CHARACTERS, PALETTES, PERSONALITIES, QiviAvatar, QiviIcon, type QiviThemeName } from 'qivi';
 import { Icon } from '../icons';
 import { href } from '../router';
 import { CHARACTER_INFO, CHARACTER_KEYS, useStore } from '../store';

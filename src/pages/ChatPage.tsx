@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { CHARACTERS, EXPRESSIONS, QiviAvatar, QiviIcon, STATES, type QiviAvatarHandle, type QiviExpression, type QiviState } from '@yogeshhrathod/qivi';
-import { useQiviAgent, type Message } from '../../agent/useQiviAgent';
+import { CHARACTERS, EXPRESSIONS, QiviAvatar, QiviIcon, STATES, type QiviAvatarHandle, type QiviExpression, type QiviState } from 'qivi';
+import { useQiviAgent, type Message } from '../agent/useQiviAgent';
 import { Icon, type IconName } from '../icons';
 import { href } from '../router';
 import { CHARACTER_INFO, CHARACTER_KEYS, useLookProps, useStore } from '../store';

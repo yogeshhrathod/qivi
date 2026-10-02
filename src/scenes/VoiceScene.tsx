@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { QiviAvatar, QiviVoice, type QiviExpression, type QiviState } from '@yogeshhrathod/qivi';
+import { QiviAvatar, QiviVoice, type QiviExpression, type QiviState } from 'qivi';
 import { Icon } from '../icons';
 import { canListen, canSpeak, createRecognition, type RecognitionLike } from '../speech';
 import { useLookProps, useStore } from '../store';

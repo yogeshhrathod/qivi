@@ -16,9 +16,12 @@ Qivi has two layers: a reusable React library and an interactive showcase. The s
 | `library/qivi/src/QiviIcon.tsx` | Static SVG fallback and canonical icon. |
 | `library/qivi/src/voice.ts` | Audio analysis, speech/manual signals, voice source lifecycle. |
 | `library/qivi/src/performance.ts` | Clock-driven expression/gesture/shape/character cues. |
-| `src/App.tsx` | Showcase orchestration, avatar settings, placement, and page composition. |
-| `src/components/` | Showcase controls, gallery, studio, chat, and additional UI. |
-| `next/index.html`, `src/next/` | Redesigned showcase served at `/next/`: hash-routed Chat, Scenes, Characters, Studio and Build sections sharing one persisted avatar look (`store.tsx`). Will replace the current showcase. |
+| `src/App.tsx` | Showcase shell: header, section navigation, tab bar, hash routes, and lazy-loaded sections. |
+| `src/store.tsx` | One persisted avatar look and theme shared by every section; converts it to `QiviAvatar` props and copyable JSX. |
+| `src/pages/` | Chat, Scenes index, Characters, Studio, and Build sections. |
+| `src/scenes/` | Product scenarios: voice, live monitor, form buddy, performance timeline, tour guide, feelings, and sizes/surfaces. |
+| `src/ui.tsx`, `src/icons.tsx` | Shared controls (sheet, segmented, slider, toggle, code block) and the stroke icon set. |
+| `src/useViewport.ts` | Visual-viewport sizing and phone-keyboard detection for the fixed app shell. |
 | `src/agent/responder.ts` | Abortable async event stream and mock responder. |
 | `src/agent/useQiviAgent.ts` | Conversation activity mapped to avatar state, expression, voice, and stream targets. |
 

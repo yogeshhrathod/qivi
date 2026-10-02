@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { QiviAvatar, type QiviAvatarHandle, type QiviExpression } from '@yogeshhrathod/qivi';
+import { QiviAvatar, type QiviAvatarHandle, type QiviExpression } from 'qivi';
 import { Icon, type IconName } from '../icons';
 import { useLookProps, useStore } from '../store';
 
