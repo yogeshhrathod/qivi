@@ -20,7 +20,7 @@
       "vite/client"
     ],
     "paths": {
-      "@yogeshhrathod/qivi": [
+      "qivi": [
         "./library/qivi/src/index.ts"
       ]
     }
