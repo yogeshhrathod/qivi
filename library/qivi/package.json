@@ -1,0 +1,67 @@
+{
+  "name": "@yogeshhrathod/qivi",
+  "version": "0.1.0",
+  "description": "Customizable particle-based AI companion for React with expressions, voice reactions, and SVG fallback.",
+  "author": "Yogesh Rathod (https://github.com/yogeshhrathod)",
+  "homepage": "https://github.com/yogeshhrathod/qivi#readme",
+  "keywords": [
+    "react",
+    "avatar",
+    "ai",
+    "companion",
+    "particles",
+    "threejs",
+    "animation"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "llms.txt",
+    "llm.txt",
+    "docs"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/qivi.css",
+    "./llms.txt": "./llms.txt"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit --emitDeclarationOnly false",
+    "prepack": "npm run build",
+    "test": "npm run build && node --test tests/*.test.mjs"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@types/three": "^0.180.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yogeshhrathod/qivi.git",
+    "directory": "library/qivi"
+  },
+  "bugs": {
+    "url": "https://github.com/yogeshhrathod/qivi/issues"
+  }
+}

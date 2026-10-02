@@ -1,0 +1,4 @@
+.qivi-stage { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 30; }
+.qivi-avatar { position: relative; display: inline-block; flex: none; }
+.qivi-avatar.is-static { display: inline-grid; place-items: center; }
+.qivi-avatar-canvas { position: absolute; pointer-events: none; z-index: 1; }

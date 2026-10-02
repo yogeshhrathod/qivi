@@ -1,0 +1,36 @@
+{
+  "name": "qivi",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Demo and development workspace for the Qivi React avatar library.",
+  "author": "Yogesh Rathod (https://github.com/yogeshhrathod)",
+  "homepage": "https://github.com/yogeshhrathod/qivi#readme",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "build:library": "npm run build --prefix library/qivi"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yogeshhrathod/qivi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yogeshhrathod/qivi/issues"
+  }
+}

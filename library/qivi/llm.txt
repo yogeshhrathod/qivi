@@ -1,0 +1,5 @@
+# @yogeshhrathod/qivi integration documentation
+
+Read llms.txt for the agent index and essential integration rules.
+Read docs/performance.md for the complete customization and performance API with examples.
+These files ship with the npm package. Neither the library nor its timeline depends on ElevenLabs.

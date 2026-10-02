@@ -1,0 +1,25 @@
+# @yogeshhrathod/qivi
+
+> Provider-independent React 19 particle avatar library. Requires react-dom 19 and three ^0.180.0. No speech-provider SDK, API key, network request, or language model is included.
+
+- [Integration and customization guide](docs/performance.md): public API, character profiles, visual presentation, expression extensions, shapes, audio synchronization, cancellation, and call-only integration.
+- [README](README.md): installation, package builds, baseline components and voice sources.
+- [Avatar props and imperative handle](dist/QiviAvatar.d.ts): authoritative TypeScript interfaces.
+- [Performance timeline](dist/performance.d.ts): cues and clock/media controller.
+- [Presets and parameter definitions](dist/presets.d.ts): BASE, Params, expression and personality definitions.
+
+## Rules for integrating agents
+
+1. Render QiviAvatar in a client component and import @yogeshhrathod/qivi/styles.css once.
+2. Activity and emotion are independent: state="talking", expression="concern" is supported.
+3. Use QiviVoice.fromMediaElement(audio) for waveform-driven speech animation. Use QiviPerformance for semantic expression/shape/character cues. Waveforms alone do not infer emotion or phoneme visemes.
+4. Cue at/duration and update()/play() clocks use SECONDS relative to the audio. Convert provider millisecond timestamps before passing them.
+5. QiviPerformance follows the actual playback clock, not text length or network arrival times. Use followMedia(audio), or play(() => yourClockInSeconds).
+6. Pass the mounted QiviAvatarHandle to new QiviPerformance(handle, cues). Dispose the controller on interruption/unmount. It restores current component props and cancels queued reactions. Audio and QiviVoice must be stopped/disposed separately by the host.
+7. Set autoEmote=false when authoring explicit impulses to avoid duplicate automatic gestures. Use reducedMotion="auto" by default.
+8. For expressive calls use expressionStrength around 1.3–1.7. Range is 0–2. This differs from intensity (0–1 body deformation). Avoid extrapolating parameter values blindly.
+9. QiviCharacter supports name, personality, theme, shape, presentation, params, and behavior. Explicit personality/shape props override profile defaults; theme="auto" uses the profile palette. A performance frame replaces the prior overlay; it is not a persistent patch.
+10. masculine/feminine/neutral presentation changes particle proportions and eyes only. Voice and behavioral personality are independent. No human model, hair, clothing, or gendered behavior is implied.
+11. customShape is a positive radial silhouette. Prefer createRadialShape(angle => radius); it validates radius 0.1–2. Holes and arbitrary meshes are unsupported.
+12. Static fallback preserves palette and supported face customization but does not animate or render morph silhouettes. Do not promise morphing under quality="static", under 48px, or without WebGL.
+13. Provider credentials belong in the host server. Convert provider timing and semantic intent into plain QiviPerformanceCue objects. Do not couple this library to ElevenLabs.
