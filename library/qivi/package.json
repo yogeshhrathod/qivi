@@ -36,7 +36,8 @@
     "./styles.css": "./dist/qivi.css",
     "./llms.txt": "./llms.txt",
     "./icon.svg": "./assets/qivi-icon.svg",
-    "./icon.png": "./assets/qivi-icon.png"
+    "./icon.png": "./assets/qivi-icon.png",
+    "./wordmark.svg": "./assets/qivi-wordmark.svg"
   },
   "sideEffects": [
     "**/*.css"

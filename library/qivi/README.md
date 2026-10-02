@@ -1,5 +1,7 @@
 # Qivi React library
 
+<img src="assets/qivi-wordmark.svg" alt="Qivi" width="180" />
+
 <img src="assets/qivi-icon.svg" alt="Qivi icon" width="80" height="80" />
 
 A particle companion for React 19, with animated states, expressions, themes, shapes, voice reactions, and a static SVG fallback. All library source, styles, and build configuration are contained in this folder. The demo and mock chat backend live outside it.
@@ -66,3 +68,5 @@ Built-in character identities are exported as `CHARACTERS.qivi`, `CHARACTERS.fem
 ## Icon assets
 
 The package includes the canonical Qivi icon as [SVG](assets/qivi-icon.svg) and [transparent PNG](assets/qivi-icon.png), exported from `QiviIcon`. Bundlers can import them from `@yogeshhrathod/qivi/icon.svg` or `@yogeshhrathod/qivi/icon.png`. For a theme-aware React icon, render `QiviIcon` directly.
+
+The banner wordmark is also available at `@yogeshhrathod/qivi/wordmark.svg`.

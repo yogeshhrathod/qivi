@@ -36,7 +36,7 @@ button { cursor: pointer; }
 
 /* header */
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { display: flex; align-items: baseline; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 16px; }
 .wordmark { position: relative; font-size: 46px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .wordmark-dot { position: absolute; top: -2px; right: -12px; width: 13px; height: 13px; border-radius: 50%; background: var(--signal); }
 .tagline { font-size: 17px; font-weight: 400; color: var(--ink-soft); margin-left: 6px; }
@@ -192,3 +192,7 @@ html.theme-dark .msg-tone { color: #ff9c8c; }
 @keyframes mic-pulse { to { box-shadow: 0 0 0 12px rgba(242, 69, 58, 0); } }
 .mic-error { margin: 6px 4px 0; font-size: 13px; color: var(--warn); }
 @media (prefers-reduced-motion: reduce) { .mic-btn.is-on { animation: none; } }
+
+/* Match the wordmark in the real-avatar README banner. */
+.brand-wordmark { display: block; width: 120px; height: auto; flex-shrink: 0; }
+@media (max-width: 600px) { .brand-wordmark { width: 100px; } }

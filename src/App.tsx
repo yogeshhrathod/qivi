@@ -1,3 +1,6 @@
+import qiviWordmark from "../library/qivi/assets/qivi-wordmark.svg";
+import qiviWordmarkDark from "../library/qivi/assets/qivi-wordmark-dark.svg";
+import qiviWordmarkDark from "../library/qivi/assets/qivi-wordmark-dark.svg";
 import { useEffect, useRef, useState } from "react";
 import { useQiviAgent } from "./agent/useQiviAgent";
 import { ChatPanel } from "./components/ChatPanel";
@@ -56,9 +59,7 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <span className="wordmark">
-            Qivi<span className="wordmark-dot" />
-          </span>
+          <img className="brand-wordmark" src={appearance === "dark" ? qiviWordmarkDark : qiviWordmark} width={120} height={65} alt="Qivi" />
           <span className="tagline">Your AI Companion</span>
         </div>
         <StatusChip state={state} />

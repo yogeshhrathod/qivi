@@ -129,7 +129,7 @@ docs/assets/        README visuals
 
 <img src="library/qivi/assets/qivi-icon.svg" alt="Qivi icon" width="96" height="96" />
 
-[SVG icon](library/qivi/assets/qivi-icon.svg) · [Transparent PNG](library/qivi/assets/qivi-icon.png) · [Real avatar banner](docs/assets/qivi-banner.png)
+[Qivi wordmark](library/qivi/assets/qivi-wordmark.svg) · [SVG icon](library/qivi/assets/qivi-icon.svg) · [Transparent PNG](library/qivi/assets/qivi-icon.png) · [Real avatar banner](docs/assets/qivi-banner.png)
 
 The icon is exported from the library's `QiviIcon` component using its default palette. The banner captures `QiviAvatar` running in a browser. See [capture details](docs/assets/README.md) to reproduce them.
 
