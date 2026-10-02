@@ -13,7 +13,7 @@
 
 **An expressive particle companion for your React app.**
 
-[Live showcase](https://yogeshhrathod.github.io/qivi/) · [Quick start](#quick-start) · [Library API](library/qivi/README.md) · [Customization guide](library/qivi/docs/performance.md)
+[GitHub](https://github.com/yogeshhrathod/qivi) · [Sponsor](https://github.com/sponsors/yogeshhrathod) · [Live showcase](https://yogeshhrathod.github.io/qivi/) · [Quick start](#quick-start) · [Library API](library/qivi/README.md) · [Customization guide](library/qivi/docs/performance.md)
 
 </div>
 

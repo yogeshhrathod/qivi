@@ -198,3 +198,9 @@ html.theme-dark .msg-tone { color: #ff9c8c; }
 @media (max-width: 600px) { .brand-wordmark { width: 100px; } }
 
 .brand-wordmark { background: transparent; color: var(--ink); padding: 0; border-radius: 0; filter: none; }
+
+.project-links { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px; }
+.project-links a { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; padding: 0 12px; border-radius: 10px; color: var(--ink-soft); text-decoration: none; font-size: 14px; transition: color .18s, background-color .18s; }
+.project-links a:hover { color: var(--ink); background: var(--paper); }
+.sponsor-link span[aria-hidden] { color: #db61a2; font-size: 22px; line-height: 1; }
+@media (prefers-reduced-motion: reduce) { .project-links a { transition: none; } }

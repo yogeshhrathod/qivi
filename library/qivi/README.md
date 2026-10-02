@@ -73,3 +73,5 @@ Built-in character identities are exported as `CHARACTERS.qivi`, `CHARACTERS.fem
 The package includes the canonical Qivi icon as [SVG](assets/qivi-icon.svg) and [transparent PNG](assets/qivi-icon.png), exported from `QiviIcon`. Bundlers can import them from `@yogeshhrathod/qivi/icon.svg` or `@yogeshhrathod/qivi/icon.png`. For a theme-aware React icon, render `QiviIcon` directly.
 
 The banner wordmark is also available at `@yogeshhrathod/qivi/wordmark.svg`.
+
+[GitHub](https://github.com/yogeshhrathod/qivi) · [Sponsor Yogesh on GitHub](https://github.com/sponsors/yogeshhrathod)

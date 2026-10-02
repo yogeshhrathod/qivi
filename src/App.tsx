@@ -63,6 +63,10 @@ export default function App() {
         </div>
         <StatusChip state={state} />
       </header>
+      <nav className="project-links" aria-label="Project links">
+        <a href="https://github.com/yogeshhrathod/qivi" target="_blank" rel="noopener noreferrer">GitHub<span className="sr-only"> (opens in a new tab)</span></a>
+        <a className="sponsor-link" href="https://github.com/sponsors/yogeshhrathod" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">♡</span> Sponsor<span className="sr-only"> (opens in a new tab)</span></a>
+      </nav>
 
       <main className="stage-grid">
         <section className="intro" aria-label="What Qivi can do">
