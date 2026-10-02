@@ -91,6 +91,10 @@ export function Companion() {
 
 Import the stylesheet once. In a framework with server components, render the avatar inside a client component. Explore the [full API](library/qivi/README.md) and [character, voice, and performance guide](library/qivi/docs/performance.md).
 
+## Contributor & AI onboarding
+
+Start with [AGENTS.md](AGENTS.md) and [CONTRIBUTING.md](CONTRIBUTING.md). Read the [architecture](docs/architecture.md), [development guide](docs/development.md), and [release guide](docs/releasing.md) before extending the project. Node 22 is specified in `.nvmrc`; GitHub Copilot and Claude entry points share the same project guidance.
+
 ## Develop & ship
 
 | Command | Purpose |
