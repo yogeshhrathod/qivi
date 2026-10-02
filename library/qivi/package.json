@@ -22,7 +22,8 @@
     "dist",
     "llms.txt",
     "llm.txt",
-    "docs"
+    "docs",
+    "assets"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -33,7 +34,9 @@
       "import": "./dist/index.js"
     },
     "./styles.css": "./dist/qivi.css",
-    "./llms.txt": "./llms.txt"
+    "./llms.txt": "./llms.txt",
+    "./icon.svg": "./assets/qivi-icon.svg",
+    "./icon.png": "./assets/qivi-icon.png"
   },
   "sideEffects": [
     "**/*.css"

@@ -1,6 +1,6 @@
 <div align="center">
 
-![Qivi — a little presence, a lot of personality](docs/assets/qivi-banner.svg)
+![Qivi — actual WebGL avatar captured from the React library](docs/assets/qivi-banner.png)
 
 [![CI & showcase](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml/badge.svg)](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml)
 ![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
@@ -14,6 +14,8 @@
 </div>
 
 Qivi gives your interface a face that listens, thinks, and responds. Thousands of particles form a companion you can shape with personalities, expressions, palettes, and voice input—from a small SVG avatar to a full-page particle layer.
+
+The banner is a browser capture of the real `QiviAvatar` component.
 
 ## Meet Qivi
 
@@ -122,6 +124,14 @@ library/qivi/tests/  Library behavior and documentation checks
 docs/assets/        README visuals
 .github/workflows/  CI and GitHub Pages deployment
 ```
+
+## Brand assets
+
+<img src="library/qivi/assets/qivi-icon.svg" alt="Qivi icon" width="96" height="96" />
+
+[SVG icon](library/qivi/assets/qivi-icon.svg) · [Transparent PNG](library/qivi/assets/qivi-icon.png) · [Real avatar banner](docs/assets/qivi-banner.png)
+
+The icon is exported from the library's `QiviIcon` component using its default palette. The banner captures `QiviAvatar` running in a browser. See [capture details](docs/assets/README.md) to reproduce them.
 
 ## Maintainer
 
