@@ -1,6 +1,6 @@
 {
-  "name": "qivi",
-  "version": "0.1.0",
+  "name": "qivi-react",
+  "version": "0.1.1",
   "description": "Customizable particle-based AI companion for React with expressions, voice reactions, and SVG fallback.",
   "license": "MIT",
   "author": "Yogesh Rathod (https://github.com/yogeshhrathod)",

@@ -1,7 +1,7 @@
 name: Release packages
 
 # Publishing a GitHub Release publishes library/qivi to:
-#   - npmjs.com as `qivi` (only when the NPM_TOKEN secret is set and the version is not already published)
+#   - npmjs.com as `qivi-react` (only when the NPM_TOKEN secret is set and the version is not already published)
 #   - GitHub Packages as `@yogeshhrathod/qivi` (GitHub's npm registry only accepts owner-scoped names)
 on:
   release:
@@ -66,7 +66,7 @@ jobs:
           registry-url: https://registry.npmjs.org
       - name: Install dependencies
         run: npm ci
-      - name: Publish qivi
+      - name: Publish qivi-react
         working-directory: library/qivi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -76,8 +76,8 @@ jobs:
             echo "::warning::NPM_TOKEN secret is not set; skipping npmjs.com publish."
             exit 0
           fi
-          if npm view "qivi@$VERSION" version >/dev/null 2>&1; then
-            echo "qivi@$VERSION is already on npmjs.com; skipping."
+          if npm view "qivi-react@$VERSION" version >/dev/null 2>&1; then
+            echo "qivi-react@$VERSION is already on npmjs.com; skipping."
             exit 0
           fi
           npm publish --provenance

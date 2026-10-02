@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { QiviAvatar, QiviVoice, type ExpressionDef, type QiviAvatarHandle, type QiviExpression, type QiviState } from 'qivi';
+import { QiviAvatar, QiviVoice, type ExpressionDef, type QiviAvatarHandle, type QiviExpression, type QiviState } from 'qivi-react';
 import { Icon } from '../icons';
 import { useLookProps, useStore } from '../store';
 

@@ -12,7 +12,7 @@ Read this file before changing the project. It is the canonical guidance for hum
 
 ## Identity and scope
 
-Qivi is a personal React particle-avatar library maintained by Yogesh Rathod. Repository: https://github.com/yogeshhrathod/qivi. Package: `qivi` on npmjs.com, mirrored as `@yogeshhrathod/qivi` on GitHub Packages by the release workflow. Showcase: https://yogeshhrathod.github.io/qivi/. Sponsor: https://github.com/sponsors/yogeshhrathod.
+Qivi is a personal React particle-avatar library maintained by Yogesh Rathod. Repository: https://github.com/yogeshhrathod/qivi. Package: `qivi-react` on npmjs.com (npm rejects plain `qivi` as too similar to existing names), mirrored as `@yogeshhrathod/qivi` on GitHub Packages by the release workflow. Showcase: https://yogeshhrathod.github.io/qivi/. Sponsor: https://github.com/sponsors/yogeshhrathod.
 
 Keep contributions independent of employer branding, corporate accounts, internal URLs, credentials, and private datasets. Use synthetic demo content and label sample responses clearly. If working in a larger workspace, change only the avatar project unless explicitly asked to work elsewhere.
 

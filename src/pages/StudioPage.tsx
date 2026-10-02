@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { EXPRESSIONS, PALETTES, PERSONALITIES, QiviAvatar, QiviIcon, paletteFor, type QiviAvatarHandle, type QiviExpression, type QiviImpulse, type QiviPersonality, type QiviPresentation, type QiviThemeName } from 'qivi';
+import { EXPRESSIONS, PALETTES, PERSONALITIES, QiviAvatar, QiviIcon, paletteFor, type QiviAvatarHandle, type QiviExpression, type QiviImpulse, type QiviPersonality, type QiviPresentation, type QiviThemeName } from 'qivi-react';
 import { Icon, type IconName } from '../icons';
 import { href } from '../router';
 import { lookToJsx, useLookProps, useStore, type ShapeChoice } from '../store';

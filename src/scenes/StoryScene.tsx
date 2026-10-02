@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { CHARACTERS, QiviAvatar, QiviPerformance, QiviVoice, type QiviAvatarHandle, type QiviCharacter, type QiviPerformanceCue } from 'qivi';
+import { CHARACTERS, QiviAvatar, QiviPerformance, QiviVoice, type QiviAvatarHandle, type QiviCharacter, type QiviPerformanceCue } from 'qivi-react';
 import { Icon, type IconName } from '../icons';
 import { useLookProps } from '../store';
 import { Segmented } from '../ui';

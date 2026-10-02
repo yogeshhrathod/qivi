@@ -12,10 +12,10 @@ To preview the downloadable artifact, extract it into a folder named `qivi`, ser
 
 Package directory: `library/qivi`. The root workspace is private and must not be the publication target. The same build is published to two registries:
 
-- **npmjs.com** as `qivi`. It is unscoped, so it is public by default and needs no `--access` flag.
-- **GitHub Packages** as `@yogeshhrathod/qivi`. GitHub's npm registry only accepts names scoped to the repository owner, so the release workflow renames the package in CI. The source `package.json` always says `qivi`.
+- **npmjs.com** as `qivi-react`. It is unscoped, so it is public by default and needs no `--access` flag. Plain `qivi` is not usable: npm's typosquatting check rejects it as too similar to existing packages.
+- **GitHub Packages** as `@yogeshhrathod/qivi`. GitHub's npm registry only accepts names scoped to the repository owner, so the release workflow renames the package in CI. The source `package.json` always says `qivi-react`.
 
-The package is MIT licensed: `LICENSE` at the repository root and in `library/qivi`, plus `"license": "MIT"` in its `package.json`. Keep both copies identical. `qivi` was first published from the `yogeshrathod` npm account, which owns the name; npm authentication is separate from GitHub login.
+The package is MIT licensed: `LICENSE` at the repository root and in `library/qivi`, plus `"license": "MIT"` in its `package.json`. Keep both copies identical. `qivi-react` is published from the `yogeshrathod` npm account; npm authentication is separate from GitHub login.
 
 From the repository root:
 
@@ -39,13 +39,13 @@ When the maintainer explicitly requests a release:
 2. Commit, push to `main`, and create a GitHub Release whose tag is `v<version>` (for example `gh release create v0.2.0 --generate-notes`).
 3. `.github/workflows/release.yml` runs on the published release. It typechecks, tests, checks that the tag matches the package version, then:
    - publishes `@yogeshhrathod/qivi` to GitHub Packages with the workflow's `GITHUB_TOKEN`;
-   - publishes `qivi` to npmjs.com with provenance when the `NPM_TOKEN` repository secret is set (an npm granular access token with publish rights on `qivi`). Without the secret this step is skipped with a warning.
+   - publishes `qivi-react` to npmjs.com with provenance when the `NPM_TOKEN` repository secret is set (an npm granular access token with publish rights on `qivi-react`). Without the secret this step is skipped with a warning.
 
    Both publish steps skip versions that already exist, so re-running the workflow is safe.
 
 To publish to npmjs.com by hand instead, run `npm publish --otp=<code>` from `library/qivi` and follow npm's 2FA prompt.
 
-Verify both registries (`npm view qivi version`, and the package page under the repository's **Packages** sidebar) before announcing availability. Do not claim a release that the workflow or registry has not confirmed.
+Verify both registries (`npm view qivi-react version`, and the package page under the repository's **Packages** sidebar) before announcing availability. Do not claim a release that the workflow or registry has not confirmed.
 
 ## Branding and sponsorship
 

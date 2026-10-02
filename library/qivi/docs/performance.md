@@ -5,8 +5,8 @@ Qivi separates identity, activity, emotion, gestures, silhouette, and audio. You
 ## Character profiles
 
 ```tsx
-import { QiviAvatar, type QiviCharacter } from 'qivi';
-import 'qivi/styles.css';
+import { QiviAvatar, type QiviCharacter } from 'qivi-react';
+import 'qivi-react/styles.css';
 
 const nova: QiviCharacter = {
   name: 'Nova',
@@ -46,7 +46,7 @@ Use any built-in expression: `neutral`, `happy`, `love`, `excited`, `curious`, `
 | `autoEmote` | Default true; false suppresses automatic expression/state/shape impulses while retaining manually requested gestures. |
 
 ```tsx
-import { QiviAvatar, type ExpressionDef } from 'qivi';
+import { QiviAvatar, type ExpressionDef } from 'qivi-react';
 
 const critical: ExpressionDef = {
   label: 'Critical warning',
@@ -67,7 +67,7 @@ const critical: ExpressionDef = {
 Built-in `shape`: `auto`, `blob`, `heart`, `shield`, `hex`, `star`. With `auto`, state, expression and personality influence morph weights. Explicit shapes override automatic selection; existing intensity still scales built-in morph strength.
 
 ```tsx
-import { createRadialShape, QiviAvatar } from 'qivi';
+import { createRadialShape, QiviAvatar } from 'qivi-react';
 const flower = createRadialShape(angle => 0.95 + 0.18 * Math.cos(6 * angle));
 // <QiviAvatar customShape={flower} />
 ```
@@ -109,8 +109,8 @@ This client component works with a recorded URL or a URL created from any speech
 ```tsx
 import { useEffect, useRef, useState } from 'react';
 import { QiviAvatar, QiviPerformance, QiviVoice,
-  type QiviAvatarHandle, type QiviPerformanceCue } from 'qivi';
-import 'qivi/styles.css';
+  type QiviAvatarHandle, type QiviPerformanceCue } from 'qivi-react';
+import 'qivi-react/styles.css';
 
 export function SpokenAvatar({ audioUrl, cues }: {
   audioUrl: string; cues: readonly QiviPerformanceCue[];
@@ -187,7 +187,7 @@ Supply separate speech delivery instructions to your TTS adapter. Visual cues do
 The new behavioral bases `spark` and `diplomat` provide enthusiastic and composed behavior, respectively. Either can be used with any presentation.
 
 ```tsx
-import { QiviAvatar, CHARACTERS } from 'qivi';
+import { QiviAvatar, CHARACTERS } from 'qivi-react';
 export function FemaleCompanion() {
   return <QiviAvatar character={CHARACTERS.female} size={240} />;
 }

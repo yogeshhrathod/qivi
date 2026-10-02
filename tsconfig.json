@@ -20,7 +20,7 @@
       "vite/client"
     ],
     "paths": {
-      "qivi": [
+      "qivi-react": [
         "./library/qivi/src/index.ts"
       ]
     }

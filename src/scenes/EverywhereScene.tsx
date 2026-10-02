@@ -1,4 +1,4 @@
-import { CHARACTERS, QiviAvatar, QiviIcon, type QiviAvatarProps, type QiviExpression } from 'qivi';
+import { CHARACTERS, QiviAvatar, QiviIcon, type QiviAvatarProps, type QiviExpression } from 'qivi-react';
 import { Icon } from '../icons';
 import { useStore } from '../store';
 

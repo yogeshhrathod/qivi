@@ -6,7 +6,7 @@
   <img alt="Qivi — actual WebGL avatar captured from the React library" src="docs/assets/qivi-banner-light.png" width="1200" />
 </picture>
 
-[![npm](https://img.shields.io/npm/v/qivi?color=cb3837&logo=npm)](https://www.npmjs.com/package/qivi)
+[![npm](https://img.shields.io/npm/v/qivi-react?color=cb3837&logo=npm)](https://www.npmjs.com/package/qivi-react)
 [![CI & showcase](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml/badge.svg)](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml)
 ![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
@@ -63,14 +63,14 @@ Open the local URL printed by Vite. A WebGL-capable browser renders the particle
 Install Qivi from npm together with its peer dependencies:
 
 ```sh
-npm install qivi react@^19 react-dom@^19 three@^0.180
+npm install qivi-react react@^19 react-dom@^19 three@^0.180
 ```
 
-It is also on GitHub Packages as [`@yogeshhrathod/qivi`](https://github.com/yogeshhrathod/qivi/pkgs/npm/qivi); see the [library README](library/qivi/README.md#use-in-another-project) for that setup. To try unreleased changes, run `npm pack` in `library/qivi` and install the resulting `qivi-<version>.tgz` instead.
+It is also on GitHub Packages as [`@yogeshhrathod/qivi`](https://github.com/yogeshhrathod/qivi/pkgs/npm/qivi); see the [library README](library/qivi/README.md#use-in-another-project) for that setup. To try unreleased changes, run `npm pack` in `library/qivi` and install the resulting `qivi-react-<version>.tgz` instead.
 
 ```tsx
-import { QiviAvatar } from "qivi";
-import "qivi/styles.css";
+import { QiviAvatar } from "qivi-react";
+import "qivi-react/styles.css";
 
 export function Companion() {
   return (

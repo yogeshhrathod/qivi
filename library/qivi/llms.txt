@@ -1,4 +1,4 @@
-# qivi
+# qivi-react
 
 > Provider-independent React 19 particle avatar library. Requires react-dom 19 and three ^0.180.0. No speech-provider SDK, API key, network request, or language model is included.
 
@@ -10,7 +10,7 @@
 
 ## Rules for integrating agents
 
-1. Render QiviAvatar in a client component and import qivi/styles.css once.
+1. Render QiviAvatar in a client component and import qivi-react/styles.css once.
 2. Activity and emotion are independent: state="talking", expression="concern" is supported.
 3. Use QiviVoice.fromMediaElement(audio) for waveform-driven speech animation. Use QiviPerformance for semantic expression/shape/character cues. Waveforms alone do not infer emotion or phoneme visemes.
 4. Cue at/duration and update()/play() clocks use SECONDS relative to the audio. Convert provider millisecond timestamps before passing them.
