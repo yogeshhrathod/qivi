@@ -12,7 +12,7 @@ Read this file before changing the project. It is the canonical guidance for hum
 
 ## Identity and scope
 
-Qivi is a personal React particle-avatar library maintained by Yogesh Rathod. Repository: https://github.com/yogeshhrathod/qivi. Package: `qivi`. Showcase: https://yogeshhrathod.github.io/qivi/. Sponsor: https://github.com/sponsors/yogeshhrathod.
+Qivi is a personal React particle-avatar library maintained by Yogesh Rathod. Repository: https://github.com/yogeshhrathod/qivi. Package: `qivi` on npmjs.com, mirrored as `@yogeshhrathod/qivi` on GitHub Packages by the release workflow. Showcase: https://yogeshhrathod.github.io/qivi/. Sponsor: https://github.com/sponsors/yogeshhrathod.
 
 Keep contributions independent of employer branding, corporate accounts, internal URLs, credentials, and private datasets. Use synthetic demo content and label sample responses clearly. If working in a larger workspace, change only the avatar project unless explicitly asked to work elsewhere.
 
@@ -57,6 +57,6 @@ Use Node 22 (`.nvmrc`), matching CI. `npm run build` builds for `/`; `build:show
 - UI changes: inspect desktop and phone, light and dark, reduced motion, keyboard focus, scroll behavior, and open/close flows touched by the change. Check overflow and composer visibility at short heights.
 - Documentation-only changes: verify commands, relative links, and source claims; a full test run is unnecessary unless examples/API change.
 - Report changed behavior, checks performed, and remaining limitations. Do not claim a deployment or npm publication without confirming it.
-- Pushing `main` triggers showcase CI/deployment. npm publishing is a separate explicit release action; settle the open-source license before a public package release.
+- Pushing `main` triggers showcase CI/deployment. Publishing a GitHub Release runs `.github/workflows/release.yml` (see `docs/releasing.md`); create releases only when explicitly asked. The project is MIT licensed.
 
 For showcase structure and sections, read `.agents/skills/qivi-showcase-design/SKILL.md`. For any UI/UX, mobile, phone-keyboard, navigation, or motion work, read `.agents/skills/qivi-ui-ux-mobile/SKILL.md`. Both skills are linked into `.claude/skills/` for Claude Code.

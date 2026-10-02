@@ -10,9 +10,12 @@ To preview the downloadable artifact, extract it into a folder named `qivi`, ser
 
 ## npm package
 
-Package directory: `library/qivi`. Name: `@yogeshhrathod/qivi`. The root workspace is private and must not be the publication target. No automated npm publishing workflow is configured. This guide does not imply that a registry release already exists.
+Package directory: `library/qivi`. The root workspace is private and must not be the publication target. The same build is published to two registries:
 
-Before an initial public release, the maintainer must select a license, add its text, and set package license metadata. Confirm package-name ownership and npm authentication separately from GitHub login.
+- **npmjs.com** as `qivi`. It is unscoped, so it is public by default and needs no `--access` flag.
+- **GitHub Packages** as `@yogeshhrathod/qivi`. GitHub's npm registry only accepts names scoped to the repository owner, so the release workflow renames the package in CI. The source `package.json` always says `qivi`.
+
+The package is MIT licensed: `LICENSE` at the repository root and in `library/qivi`, plus `"license": "MIT"` in its `package.json`. Keep both copies identical. `qivi` was first published from the `yogeshrathod` npm account, which owns the name; npm authentication is separate from GitHub login.
 
 From the repository root:
 
@@ -28,13 +31,21 @@ npm pack
 
 Inspect the archive: it should contain the built entry point, declarations, CSS, README, integration docs, and intended brand assets. Exclude credentials, corporate references, machine paths, demo source, and development artifacts. Test installation of the archive in a separate React consumer; import the stylesheet and check a real avatar and static icon.
 
-When the maintainer explicitly requests publication and package/version/license are ready, run from `library/qivi`:
+### Releasing a version
 
-```sh
-npm publish --access public
-```
+When the maintainer explicitly requests a release:
 
-Follow npm's authentication/2FA prompts. Verify the published version and installation before announcing availability. Update version and release notes according to public API compatibility; avoid silently replacing existing version numbers.
+1. Bump `version` in `library/qivi/package.json` according to public API compatibility. Never reuse a published version number.
+2. Commit, push to `main`, and create a GitHub Release whose tag is `v<version>` (for example `gh release create v0.2.0 --generate-notes`).
+3. `.github/workflows/release.yml` runs on the published release. It typechecks, tests, checks that the tag matches the package version, then:
+   - publishes `@yogeshhrathod/qivi` to GitHub Packages with the workflow's `GITHUB_TOKEN`;
+   - publishes `qivi` to npmjs.com with provenance when the `NPM_TOKEN` repository secret is set (an npm granular access token with publish rights on `qivi`). Without the secret this step is skipped with a warning.
+
+   Both publish steps skip versions that already exist, so re-running the workflow is safe.
+
+To publish to npmjs.com by hand instead, run `npm publish --otp=<code>` from `library/qivi` and follow npm's 2FA prompt.
+
+Verify both registries (`npm view qivi version`, and the package page under the repository's **Packages** sidebar) before announcing availability. Do not claim a release that the workflow or registry has not confirmed.
 
 ## Branding and sponsorship
 

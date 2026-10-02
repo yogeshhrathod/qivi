@@ -6,6 +6,7 @@
   <img alt="Qivi — actual WebGL avatar captured from the React library" src="docs/assets/qivi-banner-light.png" width="1200" />
 </picture>
 
+[![npm](https://img.shields.io/npm/v/qivi?color=cb3837&logo=npm)](https://www.npmjs.com/package/qivi)
 [![CI & showcase](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml/badge.svg)](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml)
 ![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
@@ -59,22 +60,17 @@ Open the local URL printed by Vite. A WebGL-capable browser renders the particle
 
 ## Add Qivi to your app
 
-The package name is **`@yogeshhrathod/qivi`**. It has not been published to npm yet. Build an installable archive locally:
+Install Qivi from npm together with its peer dependencies:
 
 ```sh
-cd library/qivi
-npm pack
+npm install qivi react@^19 react-dom@^19 three@^0.180
 ```
 
-In your consuming project, install that archive together with its peer dependencies:
-
-```sh
-npm install /path/to/yogeshhrathod-qivi-0.1.0.tgz react@^19 react-dom@^19 three@^0.180
-```
+It is also on GitHub Packages as [`@yogeshhrathod/qivi`](https://github.com/yogeshhrathod/qivi/pkgs/npm/qivi); see the [library README](library/qivi/README.md#use-in-another-project) for that setup. To try unreleased changes, run `npm pack` in `library/qivi` and install the resulting `qivi-<version>.tgz` instead.
 
 ```tsx
-import { QiviAvatar } from "@yogeshhrathod/qivi";
-import "@yogeshhrathod/qivi/styles.css";
+import { QiviAvatar } from "qivi";
+import "qivi/styles.css";
 
 export function Companion() {
   return (
@@ -145,4 +141,4 @@ The icon is exported from the library's `QiviIcon` component using its default p
 
 Built by [Yogesh Rathod](https://github.com/yogeshhrathod). Suggestions and bugs are welcome in [Issues](https://github.com/yogeshhrathod/qivi/issues).
 
-An open-source license has not been selected yet.
+Released under the [MIT License](LICENSE).

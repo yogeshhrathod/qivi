@@ -1,0 +1,116 @@
+name: Release packages
+
+# Publishing a GitHub Release publishes library/qivi to:
+#   - npmjs.com as `qivi` (only when the NPM_TOKEN secret is set and the version is not already published)
+#   - GitHub Packages as `@yogeshhrathod/qivi` (GitHub's npm registry only accepts owner-scoped names)
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify release
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Test library & documentation
+        run: npm test
+      - name: Check tag matches package version
+        id: version
+        working-directory: library/qivi
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "release" ] && [ "${{ github.event.release.tag_name }}" != "v$version" ]; then
+            echo "::error::Release tag ${{ github.event.release.tag_name }} does not match package version v$version"
+            exit 1
+          fi
+
+  npm:
+    name: Publish to npmjs.com
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - name: Install dependencies
+        run: npm ci
+      - name: Publish qivi
+        working-directory: library/qivi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::warning::NPM_TOKEN secret is not set; skipping npmjs.com publish."
+            exit 0
+          fi
+          if npm view "qivi@$VERSION" version >/dev/null 2>&1; then
+            echo "qivi@$VERSION is already on npmjs.com; skipping."
+            exit 0
+          fi
+          npm publish --provenance
+
+  github-packages:
+    name: Publish to GitHub Packages
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: "@yogeshhrathod"
+      - name: Install dependencies
+        run: npm ci
+      - name: Publish @yogeshhrathod/qivi
+        working-directory: library/qivi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          npm pkg set name=@yogeshhrathod/qivi publishConfig.registry=https://npm.pkg.github.com
+          if npm view "@yogeshhrathod/qivi@$VERSION" version >/dev/null 2>&1; then
+            echo "@yogeshhrathod/qivi@$VERSION is already on GitHub Packages; skipping."
+            exit 0
+          fi
+          npm publish

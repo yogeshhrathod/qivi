@@ -11,17 +11,23 @@ A particle companion for React 19, with animated states, expressions, themes, sh
 
 ## Use in another project
 
-Install the package and its peer dependencies after it is published:
+Install the package and its peer dependencies from npm:
 
 ```sh
-npm install @yogeshhrathod/qivi react@^19 react-dom@^19 three@^0.180
+npm install qivi react@^19 react-dom@^19 three@^0.180
+```
+
+Qivi is also published to GitHub Packages as `@yogeshhrathod/qivi`. To install from there, point the scope at GitHub's registry in your `.npmrc` (`@yogeshhrathod:registry=https://npm.pkg.github.com`, plus a GitHub token with `read:packages`) and install it under the `qivi` alias so the imports below stay the same:
+
+```sh
+npm install qivi@npm:@yogeshhrathod/qivi
 ```
 
 In your React app:
 
 ```tsx
-import { QiviAvatar } from "@yogeshhrathod/qivi";
-import "@yogeshhrathod/qivi/styles.css";
+import { QiviAvatar } from "qivi";
+import "qivi/styles.css";
 
 export function Companion() {
   return <QiviAvatar size={160} personality="core" state="idle" />;
@@ -32,11 +38,11 @@ Import the stylesheet once at the application entry point. Use a bundler such as
 
 ## Share as a package
 
-Run `npm pack` in this folder to build a portable `yogeshhrathod-qivi-0.1.0.tgz`. Install that file in another project with `npm install /path/to/yogeshhrathod-qivi-0.1.0.tgz`. React, React DOM, and Three.js are peer dependencies and are supplied by the consuming app.
+Run `npm pack` in this folder to build a portable `qivi-0.1.0.tgz`. Install that file in another project with `npm install /path/to/qivi-0.1.0.tgz`. React, React DOM, and Three.js are peer dependencies and are supplied by the consuming app.
 
-To prepare an npm release, run `npm test` and `npm pack --dry-run` in this folder. The package includes the built library, TypeScript declarations, styles, and integration documentation. Run `npm publish --access public` from this folder when the package name and npm account permissions are configured. The demo workspace is private and is not published.
+To prepare an npm release, run `npm test` and `npm pack --dry-run` in this folder. The package includes the built library, TypeScript declarations, styles, and integration documentation. Releases are published by the repository's release workflow; see [release guidance](https://github.com/yogeshhrathod/qivi/blob/main/docs/releasing.md). The demo workspace is private and is not published.
 
-Maintained by [Yogesh Rathod](https://github.com/yogeshhrathod).
+Maintained by [Yogesh Rathod](https://github.com/yogeshhrathod). Released under the [MIT License](LICENSE).
 
 ## API
 
@@ -64,14 +70,14 @@ npm test
 npm run build
 ```
 
-From the demo repository root, `npm run build:library` builds this package. The demo imports the source through an `@yogeshhrathod/qivi` alias, so edits appear immediately during development.
+From the demo repository root, `npm run build:library` builds this package. The demo imports the source through an `qivi` alias, so edits appear immediately during development.
 
 Built-in character identities are exported as `CHARACTERS.qivi`, `CHARACTERS.female` (Nova), `CHARACTERS.male` (Sol), `CHARACTERS.ember` (playful star), `CHARACTERS.sage` (calm mint), and `CHARACTERS.atlas` (protective shield). The `spark` and `diplomat` personalities are available independently of these visual identities.
 
 ## Icon assets
 
-The package includes the canonical Qivi icon as [SVG](assets/qivi-icon.svg) and [transparent PNG](assets/qivi-icon.png), exported from `QiviIcon`. Bundlers can import them from `@yogeshhrathod/qivi/icon.svg` or `@yogeshhrathod/qivi/icon.png`. For a theme-aware React icon, render `QiviIcon` directly.
+The package includes the canonical Qivi icon as [SVG](assets/qivi-icon.svg) and [transparent PNG](assets/qivi-icon.png), exported from `QiviIcon`. Bundlers can import them from `qivi/icon.svg` or `qivi/icon.png`. For a theme-aware React icon, render `QiviIcon` directly.
 
-The banner wordmark is also available at `@yogeshhrathod/qivi/wordmark.svg`.
+The banner wordmark is also available at `qivi/wordmark.svg`.
 
 [GitHub](https://github.com/yogeshhrathod/qivi) · [Sponsor Yogesh on GitHub](https://github.com/sponsors/yogeshhrathod)

@@ -28,4 +28,4 @@ Root dependencies support both the demo and library builds; run `npm ci` at the 
 
 Prefer plain TypeScript and existing components over new dependencies. Keep animation work out of React render loops. Preserve public API compatibility, resource cleanup, reduced motion, and SVG fallback. Keep mock content clearly synthetic and never commit API keys or employer-specific material.
 
-The project has not selected an open-source license yet. Discuss licensing with the maintainer before an npm release or third-party redistribution. See [release guidance](docs/releasing.md).
+Qivi is released under the [MIT License](LICENSE). Contributions are accepted under the same license. See [release guidance](docs/releasing.md).

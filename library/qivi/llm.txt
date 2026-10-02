@@ -1,4 +1,4 @@
-# @yogeshhrathod/qivi integration documentation
+# qivi integration documentation
 
 Read llms.txt for the agent index and essential integration rules.
 Read docs/performance.md for the complete customization and performance API with examples.

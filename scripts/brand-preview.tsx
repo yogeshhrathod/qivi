@@ -36,6 +36,6 @@ createRoot(document.getElementById("root")!).render(
         appearance={dark ? "dark" : "light"} quality="high" accent="always" glyphs={false} interactive={false}
         autoSleep={false} autoEmote={false} reducedMotion={false} />
     </div>
-    <span className="signature">Real particles. Rendered by @yogeshhrathod/qivi.</span>
+    <span className="signature">Real particles. Rendered by qivi.</span>
   </main>
 );
