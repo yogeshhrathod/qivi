@@ -11,7 +11,9 @@
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
-    "build:library": "npm run build --prefix library/qivi"
+    "build:library": "npm run build --prefix library/qivi",
+    "build:showcase": "tsc --noEmit && vite build --base=/qivi/",
+    "test": "npm test --prefix library/qivi"
   },
   "dependencies": {
     "react": "^19.1.1",
