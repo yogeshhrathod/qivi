@@ -3,7 +3,7 @@ import type { QiviShape } from "./shapes";
 
 export type { QiviShape };
 
-export type QiviPersonality = "core" | "scout" | "analyst" | "guardian" | "sage" | "chaos";
+export type QiviPersonality = "core" | "scout" | "analyst" | "guardian" | "sage" | "chaos" | "spark" | "diplomat";
 
 export type QiviState =
   | "idle"

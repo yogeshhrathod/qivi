@@ -58,3 +58,5 @@ Use Node 22 (`.nvmrc`), matching CI. `npm run build` builds for `/`; `build:show
 - Documentation-only changes: verify commands, relative links, and source claims; a full test run is unnecessary unless examples/API change.
 - Report changed behavior, checks performed, and remaining limitations. Do not claim a deployment or npm publication without confirming it.
 - Pushing `main` triggers showcase CI/deployment. npm publishing is a separate explicit release action; settle the open-source license before a public package release.
+
+For showcase UI, visual design, mobile behavior, and interaction motion, read `.agents/skills/qivi-showcase-design/SKILL.md`.

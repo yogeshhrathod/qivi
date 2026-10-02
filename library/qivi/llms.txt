@@ -23,3 +23,7 @@
 11. customShape is a positive radial silhouette. Prefer createRadialShape(angle => radius); it validates radius 0.1–2. Holes and arbitrary meshes are unsupported.
 12. Static fallback preserves palette and supported face customization but does not animate or render morph silhouettes. Do not promise morphing under quality="static", under 48px, or without WebGL.
 13. Provider credentials belong in the host server. Convert provider timing and semantic intent into plain QiviPerformanceCue objects. Do not couple this library to ElevenLabs.
+
+## Character versions
+
+CHARACTERS.qivi is neutral; CHARACTERS.female is Nova; CHARACTERS.male is Sol; CHARACTERS.ember is a playful amber star; CHARACTERS.sage is a calm mint companion; CHARACTERS.atlas is a protective midnight shield. Each is an editable QiviCharacter profile. New QiviPersonality bases spark and diplomat can be paired with any presentation or voice. Read docs/performance.md for examples.

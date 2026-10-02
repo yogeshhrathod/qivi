@@ -29,57 +29,48 @@ const sleep = (ms: number, signal: AbortSignal) =>
     }, { once: true });
   });
 
-const RISK: Finding[] = [
-  { id: "CVE-2024-3400", title: "PAN-OS GlobalProtect command injection", severity: "critical", asset: "fw-edge-02", detail: "Internet-facing, exploit public" },
-  { id: "CVE-2023-4966", title: "Citrix Bleed session token leak", severity: "critical", asset: "ns-gw-01", detail: "Unpatched for 41 days" },
-  { id: "CVE-2024-21762", title: "FortiOS out-of-bounds write", severity: "high", asset: "vpn-eu-03", detail: "Reachable from 2 subnets" },
-];
-
-const PATCH: Finding[] = [
-  { id: "KB5034441", title: "Windows Recovery Environment update", severity: "medium", asset: "112 endpoints", detail: "Ready to deploy" },
-  { id: "RHSA-2024:1249", title: "OpenSSL security update", severity: "high", asset: "38 Linux hosts", detail: "Reboot not required" },
-];
-
-const ASSETS: Finding[] = [
-  { id: "INV-2207", title: "Unmanaged hosts discovered", severity: "low", asset: "10.40.0.0/16", detail: "14 new devices this week" },
-  { id: "INV-2208", title: "Expired agent certificates", severity: "medium", asset: "9 servers", detail: "Agents stopped reporting" },
-];
-
 interface Scenario {
   findings: Finding[];
   answer: string;
   tone: "success" | "warning" | "error";
   failAt?: "searching";
 }
-
-function pick(q: string): Scenario {
-  const s = q.toLowerCase();
-  if (/(fail|error|break|crash|offline)/.test(s))
-    return { findings: [], tone: "error", failAt: "searching", answer: "I couldn't reach the asset inventory service, so I have no results. Check that the connector is online, then ask again." };
-  if (/(critical|risk|vuln|cve|exposed|attack|threat)/.test(s))
-    return { findings: RISK, tone: "warning", answer: "I found 2 critical vulnerabilities on internet-facing gateways. Both have public exploits, so patch fw-edge-02 first, then ns-gw-01. I've ranked all three by exposure in the findings panel." };
-  if (/(patch|fix|remediat|update)/.test(s))
-    return { findings: PATCH, tone: "success", answer: "Two patch bundles are ready and cover 150 hosts. Neither needs a reboot during business hours. I can schedule them for tonight's maintenance window." };
-  return { findings: ASSETS, tone: "success", answer: "Your environment looks healthy overall. I found 14 unmanaged devices and 9 servers whose agents stopped reporting. Both are listed in the findings panel." };
+function pick(query: string): Scenario {
+  const text = query.toLowerCase();
+  let answer: string;
+  if (/(email|draft|write|follow.up)/.test(text)) {
+    answer = "Here’s a friendly starting point:\n\nHi Alex,\n\nJust following up on our conversation. Have you had a chance to look at the proposal? I’d be happy to answer questions or find a time to talk.\n\nThanks,\n[Your name]\n\nKeep the opening warm, make the request clear, and give them an easy next step.";
+  } else if (/(plan|afternoon|focus|schedule)/.test(text)) {
+    answer = "Let’s make your afternoon feel manageable:\n\n1. Spend 10 minutes choosing one priority.\n2. Give it a 45-minute block with notifications off.\n3. Take a short break away from your screen.\n4. Use the next block for smaller tasks.\n5. Leave 10 minutes to wrap up and decide what comes next.\n\nA little breathing room makes a plan easier to follow.";
+  } else if (/(rainbow|learn|explain)/.test(text)) {
+    answer = "A rainbow forms when sunlight passes through droplets of water. The light bends as it enters, reflects inside the droplet, and bends again as it leaves. Different colors bend by different amounts, so white sunlight spreads into a band of colors.\n\nThink of each raindrop as a tiny prism. The angle between you, the Sun and the droplets determines which colors reach your eyes.";
+  } else if (/(coffee|brainstorm|idea|create|name)/.test(text)) {
+    answer = "Here are a few directions for your coffee shop:\n\n• Slow Morning — relaxed and welcoming.\n• Common Ground — built around conversation.\n• Little Ritual — a daily moment to look forward to.\n• Ember & Bean — warm and a little distinctive.\n• Second Cup Society — playful and social.\n\nPick the feeling you want people to have when they walk in, then choose a name that matches it.";
+  } else if (/(hello|hi\b|hey)/.test(text)) {
+    answer = "Hi! I’m Qivi. We can explore an idea, draft something, make a plan, or learn something new. What would you like to work on?";
+  } else {
+    answer = "Let’s work through that together. Start with the outcome you want, then break it into a few smaller steps. It helps to write down what you already know, what is uncertain, and the first thing you can try.\n\nThis showcase uses sample replies to demonstrate how Qivi reacts while listening, thinking and answering. Try one of the writing, planning, learning or creative prompts for a more specific example.";
+  }
+  return { findings: [], tone: "success", answer };
 }
 
 export const mockResponder: Responder = async function* (query, signal) {
   const sc = pick(query);
   yield { type: "phase", phase: "thinking" };
-  await sleep(1100, signal);
+  await sleep(500, signal);
   yield { type: "phase", phase: "searching" };
-  await sleep(1600, signal);
+  await sleep(450, signal);
   if (sc.failAt) {
     yield* stream(sc.answer, signal);
     yield { type: "done", tone: "error" };
     return;
   }
   yield { type: "phase", phase: "analyzing" };
-  await sleep(1400, signal);
+  await sleep(450, signal);
   yield { type: "phase", phase: "found" };
   await sleep(450, signal);
   yield { type: "findings", items: sc.findings };
-  await sleep(650, signal);
+  await sleep(200, signal);
   yield* stream(sc.answer, signal);
   yield { type: "done", tone: sc.tone };
 };

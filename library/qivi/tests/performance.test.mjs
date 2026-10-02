@@ -9,6 +9,7 @@ const load = async (file) => {
 };
 const { QiviPerformance } = await load('performance');
 const { createRadialShape } = await load('shapes');
+const { CHARACTERS } = await load('characters');
 const { composeTarget, BASE, paletteFor, PALETTES } = await load('presets');
 const base = { personality: 'core', state: 'idle', expression: 'neutral', shape: 'auto', theme: 'auto', accent: 'auto', glyphs: true, smile: true, intensity: 1, lighting: 1 };
 function target() {
@@ -85,4 +86,12 @@ test('radial shape helper validates shape geometry and returns immutable samples
   assert.throws(() => createRadialShape(() => NaN), RangeError);
   assert.throws(() => createRadialShape(() => -1), RangeError);
   assert.throws(() => createRadialShape(() => 1, 2), RangeError);
+});
+
+test('female and male character profiles have distinct face/body geometry with independent personality', () => {
+  const female = composeTarget({ ...base, personality: CHARACTERS.female.personality, character: CHARACTERS.female }, 'neutral');
+  const male = composeTarget({ ...base, personality: CHARACTERS.male.personality, character: CHARACTERS.male }, 'neutral');
+  assert.ok(female.height > male.height); assert.ok(female.width < male.width);
+  assert.ok(female.scaleL > male.scaleL); assert.ok(female.spacing < male.spacing);
+  assert.equal(composeTarget({ ...base, personality: 'diplomat', character: CHARACTERS.female }, 'neutral').scaleL, female.scaleL);
 });

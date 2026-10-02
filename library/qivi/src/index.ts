@@ -9,3 +9,4 @@ export { QiviPerformance, type QiviPerformanceFrame, type QiviPerformanceCue, ty
 export { PRESENTATIONS, BASE, composeTarget, type Params, type ParamKey, type ExpressionDef, type PersonalityDef } from "./presets";
 export type { QiviCharacter, QiviPresentation } from "./types";
 export { createRadialShape } from "./shapes";
+export { CHARACTERS } from "./characters";

@@ -1,10 +1,12 @@
+import { OptionIcon } from "./OptionIcon";
 import { useEffect, useRef, useState } from "react";
 import type { Finding } from "../agent/responder";
 import type { Message } from "../agent/useQiviAgent";
 import { QiviAvatar } from "@yogeshhrathod/qivi";
-import type { QiviPersonality, QiviState, QiviTheme } from "@yogeshhrathod/qivi";
+import type { QiviCharacter, QiviPersonality, QiviState, QiviTheme } from "@yogeshhrathod/qivi";
 
 interface Props {
+  character?: QiviCharacter;
   messages: Message[];
   findings: Finding[];
   state: QiviState;
@@ -36,33 +38,60 @@ const SpeakerIcon = ({ on }: { on: boolean }) => (
 
 const TONE_LABEL = { success: "Done", warning: "Needs attention", error: "Failed" } as const;
 
-export function ChatPanel({ messages, findings, state, onSend, inputProps, bindInput, bindFindings, bindAnswer, bindDock, docked, personality, theme, mic, speech }: Props) {
+export function ChatPanel({ character, messages, findings, state, onSend, inputProps, bindInput, bindFindings, bindAnswer, bindDock, docked, personality, theme, mic, speech }: Props) {
   const [value, setValue] = useState("");
   const logRef = useRef<HTMLDivElement>(null);
+  const following = useRef(true);
+  const [edges, setEdges] = useState({ top: false, bottom: false });
+  const updateEdges = () => {
+    const el = logRef.current;
+    if (!el) return;
+    const bottom = el.scrollHeight - el.clientHeight - el.scrollTop > 12;
+    setEdges(previous => previous.top === (el.scrollTop > 8) && previous.bottom === bottom ? previous : { top: el.scrollTop > 8, bottom });
+  };
   const lastQivi = [...messages].reverse().find((m) => m.role === "qivi");
 
   useEffect(() => {
-    logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: "smooth" });
+    const el = logRef.current;
+    if (el && following.current) el.scrollTop = el.scrollHeight;
+    updateEdges();
   }, [messages]);
+
+  useEffect(() => {
+    const el = logRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => {
+      if (following.current) el.scrollTop = el.scrollHeight;
+      updateEdges();
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    following.current = true;
     onSend(value);
     setValue("");
   };
 
   return (
     <section className="chat" aria-label="Conversation with Qivi">
-      <div className="chat-log" ref={logRef} aria-live="polite">
+      <div className={`chat-scroll ${edges.top ? 'fade-top' : ''} ${edges.bottom ? 'fade-bottom' : ''}`}>
+      <div className="chat-log" ref={logRef} aria-live="polite" onScroll={() => {
+        const el = logRef.current!;
+        following.current = el.scrollHeight - el.clientHeight - el.scrollTop < 48;
+        updateEdges();
+      }}>
         {messages.length === 0 && (
           <div className="chat-empty">
-            <p className="chat-empty-title">Ask about your security posture</p>
-            <p>Try “Show me critical vulnerabilities” or “Which patches should I deploy?”</p>
+            <p className="chat-empty-title">A little curiosity goes a long way.</p>
+            <p>Choose a starting point above, type a message, or talk to Qivi.</p>
           </div>
         )}
         {messages.map((m) => (
           <div key={m.id} className={`msg msg-${m.role} ${m.tone ? `tone-${m.tone}` : ""}`} ref={m === lastQivi ? bindAnswer : undefined}>
-            {m.role === "qivi" && <QiviAvatar size={26} label="Qivi" personality={personality} theme={theme} expression={m.tone === "success" ? "happy" : "neutral"} state={m.tone === "error" ? "error" : "idle"} />}
+            {m.role === "qivi" && <QiviAvatar character={character} size={26} label="Qivi" personality={personality} theme={theme} expression={m.tone === "success" ? "happy" : "neutral"} state={m.tone === "error" ? "error" : "idle"} />}
             <div className="msg-body">
               {m.tone && m.tone !== "success" && <span className="msg-tone">{TONE_LABEL[m.tone]}</span>}
               {m.text || <span className="msg-pending">Working on it</span>}
@@ -72,7 +101,13 @@ export function ChatPanel({ messages, findings, state, onSend, inputProps, bindI
         ))}
       </div>
 
-      <div className={`findings ${findings.length ? "has-items" : ""} ${["searching", "analyzing", "found"].includes(state) ? "is-active" : ""}`} ref={bindFindings} aria-label="Findings">
+      {edges.bottom && <button className="jump-latest header-icon" aria-label="Scroll to latest message" onClick={() => {
+        following.current = true;
+        logRef.current?.scrollTo({ top: logRef.current.scrollHeight, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }}><OptionIcon name="down" /></button>}
+      </div>
+
+      {findings.length > 0 && <div className={`findings ${findings.length ? "has-items" : ""} ${["searching", "analyzing", "found"].includes(state) ? "is-active" : ""}`} ref={bindFindings} aria-label="Findings">
         <div className="findings-head">
           <span>Findings</span>
           <span className="findings-count">{findings.length ? `${findings.length} results` : state === "searching" || state === "analyzing" ? "Scanning…" : "None yet"}</span>
@@ -90,7 +125,7 @@ export function ChatPanel({ messages, findings, state, onSend, inputProps, bindI
             </li>
           ))}
         </ul>
-      </div>
+      </div>}
 
       <form className="composer" onSubmit={submit}>
         <div className={`dock ${docked ? "is-docked" : ""}`} ref={bindDock} aria-hidden="true" />
@@ -134,8 +169,9 @@ export function ChatPanel({ messages, findings, state, onSend, inputProps, bindI
             <MicIcon />
           </button>
         )}
-        <button type="submit" disabled={mic.on || !value.trim()}>Send</button>
+        <button type="submit" disabled={mic.on || !value.trim()} aria-label="Send" title="Send message"><OptionIcon name="send" /></button>
       </form>
+      <p className="chat-demo-note">Interactive demo · Replies are sample responses.</p>
       {mic.error && <p className="mic-error" role="alert">{mic.error}</p>}
     </section>
   );

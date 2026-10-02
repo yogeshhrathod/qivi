@@ -195,6 +195,20 @@ export const PERSONALITIES: Record<QiviPersonality, PersonalityDef> = {
     saccade: [3, 6],
     gridAffinity: 0.6,
   },
+  spark: {
+    label: "Spark",
+    blurb: "Bright, animated and enthusiastic",
+    palette: "lavender",
+    params: { breath: .028, breathPeriod: 3.2, freeSpeed: 1.3, sparkle: .45, mouth: .75, noiseSpeed: .42 },
+    blink: [2, 4], saccade: [.8, 1.8], gridAffinity: .8,
+  },
+  diplomat: {
+    label: "Diplomat",
+    blurb: "Attentive, composed and reassuring",
+    palette: "arctic",
+    params: { noise: .75, noiseSpeed: .22, breathPeriod: 5.8, freeSpeed: .65, density: 1.1, mouth: .45 },
+    blink: [3, 6], saccade: [1.5, 3.5], gridAffinity: 1,
+  },
   chaos: {
     label: "Chaos",
     blurb: "Creative & unpredictable",

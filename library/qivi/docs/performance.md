@@ -26,7 +26,7 @@ export function Companion() {
 
 Profiles do not register global mutable presets. Keep profile objects stable outside render or memoize dynamic ones. Swapping `character` on the same component blends numeric targets and colors; do not change its React `key` when you want a continuous morph.
 
-Personality bases: `core`, `scout`, `analyst`, `guardian`, `sage`, `chaos`. Each supplies particle/body parameters, blink and gaze intervals, and optional spontaneous behaviors. Override numeric targets through `character.params`; override behavior through `character.behavior`. `blink` and `saccade` are positive `[min, max]` intervals in seconds; `gridAffinity` is 0–1; `randomBurst` and `probe` are positive intervals, with 0 disabling them.
+Personality bases: `core`, `scout`, `analyst`, `guardian`, `sage`, `chaos`, `spark`, `diplomat`. Each supplies particle/body parameters, blink and gaze intervals, and optional spontaneous behaviors. Override numeric targets through `character.params`; override behavior through `character.behavior`. `blink` and `saccade` are positive `[min, max]` intervals in seconds; `gridAffinity` is 0–1; `randomBurst` and `probe` are positive intervals, with 0 disabling them.
 
 Presentation presets: `neutral`, `masculine`, `feminine`. These alter body and eye proportions only, independently of personality, palette and voice. They are editable visual starting points, not human models or gendered behaviors. For masculine/feminine voice variants choose the voice in your own speech adapter.
 
@@ -179,3 +179,19 @@ This example assumes local or same-origin audio URLs. If the host creates a blob
 For voice-call applications, keep integration inside the call experience. The host maps grounded reply intent (warning, critical, reassuring, success, question) to expressions, strength, shape and gestures. Convert speech-provider alignment to phrase start/end seconds, then produce cue objects. Feed actual audio to QiviVoice and the same playback clock to QiviPerformance. Do not estimate sentence timing from character counts when alignment is available. Keep provider API keys server-side; no provider dependency belongs in this library.
 
 Supply separate speech delivery instructions to your TTS adapter. Visual cues do not change vocal tone automatically. A warning → action plan → reassurance sequence should use concern → focused → happy/neutral with deliberate gestures and smoothly settling transitions. This library work provides the API; the bot adapter is a separate implementation step.
+
+## Ready-made male and female versions
+
+`CHARACTERS.qivi`, `CHARACTERS.female` (Nova), and `CHARACTERS.male` (Sol) are reusable `QiviCharacter` profiles. Nova uses a taller silhouette and larger, closer eyes; Sol uses a wider silhouette and smaller, wider-set eyes. Their parameters and presentation can be overridden independently of behavioral personality and voice. These remain particle characters, not human models.
+
+The new behavioral bases `spark` and `diplomat` provide enthusiastic and composed behavior, respectively. Either can be used with any presentation.
+
+```tsx
+import { QiviAvatar, CHARACTERS } from '@yogeshhrathod/qivi';
+export function FemaleCompanion() {
+  return <QiviAvatar character={CHARACTERS.female} size={240} />;
+}
+export function MaleCompanion() {
+  return <QiviAvatar character={{ ...CHARACTERS.male, personality: 'spark' }} size={240} />;
+}
+```

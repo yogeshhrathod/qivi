@@ -1,3 +1,4 @@
+import { OptionIcon } from "./OptionIcon";
 import { useState } from "react";
 import { EXPRESSIONS, PALETTES, PERSONALITIES, STATES, paletteFor } from "@yogeshhrathod/qivi";
 import type { QiviExpression, QiviPersonality, QiviShape, QiviState, QiviTheme, QiviThemeName } from "@yogeshhrathod/qivi";
@@ -20,6 +21,7 @@ export interface StudioSettings {
 }
 
 interface Props {
+  embedded?: boolean;
   settings: StudioSettings;
   onChange: (p: Partial<StudioSettings>) => void;
   state: QiviState;
@@ -43,14 +45,14 @@ const SHAPES: { key: "auto" | QiviShape; label: string }[] = [
 ];
 
 export function Studio(p: Props) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(p.embedded ?? false);
   const { settings: s } = p;
 
   return (
     <aside className={`studio ${open ? "is-open" : ""}`} aria-label="Qivi studio controls">
-      <button type="button" className="studio-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-        {open ? "Hide studio" : "Open studio"}
-      </button>
+      {!p.embedded && <button type="button" className="studio-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+        {open ? "Close avatar settings" : "Avatar settings"}
+      </button>}
       {open && (
         <div className="studio-body">
           <Group label="Personality">
@@ -94,7 +96,7 @@ export function Studio(p: Props) {
           <Group label="Shape" hint={s.shape === "auto" ? "Morphs with state and mood" : "Locked"}>
             {SHAPES.map(({ key, label }) => (
               <Chip key={key} active={s.shape === key} onClick={() => p.onChange({ shape: key })}>
-                {label}
+                <OptionIcon name={label} />{label}
               </Chip>
             ))}
           </Group>
@@ -137,7 +139,7 @@ function Group({ label, hint, children }: { label: string; hint?: string; childr
   return (
     <div className="group" role="group" aria-label={label}>
       <div className="group-label">
-        {label}
+        <OptionIcon name={label} />{label}
         {hint && <span className="group-hint">{hint}</span>}
       </div>
       <div className="group-items">{children}</div>
@@ -148,7 +150,7 @@ function Group({ label, hint, children }: { label: string; hint?: string; childr
 function Chip({ active, onClick, children, title }: { active: boolean; onClick: () => void; children: React.ReactNode; title?: string }) {
   return (
     <button type="button" className={`chip ${active ? "is-active" : ""}`} aria-pressed={active} onClick={onClick} title={title}>
-      {children}
+      <OptionIcon name={typeof children === "string" ? children : "settings"} />{children}
     </button>
   );
 }
@@ -156,7 +158,7 @@ function Chip({ active, onClick, children, title }: { active: boolean; onClick: 
 function Slider({ label, value, onChange, display, ...range }: { label: string; value: number; min: number; max: number; step: number; onChange: (v: number) => void; display?: string }) {
   return (
     <label className="slider">
-      {label}
+      <span className="option-label"><OptionIcon name={label} />{label}</span>
       <input type="range" {...range} value={value} onChange={(e) => onChange(+e.target.value)} />
       <span className="slider-value">{display ?? `${Math.round(value * 100)}%`}</span>
     </label>
@@ -168,7 +170,7 @@ function Toggle({ label, checked, onChange }: { label: string; checked: boolean;
     <label className="toggle">
       <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
       <span className="toggle-track" aria-hidden="true" />
-      {label}
+      <span className="option-label"><OptionIcon name={label} />{label}</span>
     </label>
   );
 }

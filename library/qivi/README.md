@@ -66,7 +66,7 @@ npm run build
 
 From the demo repository root, `npm run build:library` builds this package. The demo imports the source through an `@yogeshhrathod/qivi` alias, so edits appear immediately during development.
 
-Built-in character identities are exported as `CHARACTERS.qivi`, `CHARACTERS.female` (Nova), and `CHARACTERS.male` (Sol). The `spark` and `diplomat` personalities are available independently of these visual identities.
+Built-in character identities are exported as `CHARACTERS.qivi`, `CHARACTERS.female` (Nova), `CHARACTERS.male` (Sol), `CHARACTERS.ember` (playful star), `CHARACTERS.sage` (calm mint), and `CHARACTERS.atlas` (protective shield). The `spark` and `diplomat` personalities are available independently of these visual identities.
 
 ## Icon assets
 
