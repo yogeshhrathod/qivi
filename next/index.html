@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (() => {
+        let mode = 'system';
+        try { mode = localStorage.getItem('qivi-next-theme') || 'system'; } catch {}
+        const dark = mode === 'dark' || (mode !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('theme-dark', dark);
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#f5f7fc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111a30" media="(prefers-color-scheme: dark)" />
+    <meta name="description" content="Qivi is a living particle companion for React. Chat with it, talk to it, and see it react in real product scenarios." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <title>Qivi — a companion with character</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/next/main.tsx"></script>
+  </body>
+</html>

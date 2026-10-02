@@ -59,4 +59,4 @@ Use Node 22 (`.nvmrc`), matching CI. `npm run build` builds for `/`; `build:show
 - Report changed behavior, checks performed, and remaining limitations. Do not claim a deployment or npm publication without confirming it.
 - Pushing `main` triggers showcase CI/deployment. npm publishing is a separate explicit release action; settle the open-source license before a public package release.
 
-For showcase UI, visual design, mobile behavior, and interaction motion, read `.agents/skills/qivi-showcase-design/SKILL.md`.
+For showcase UI, visual design, mobile behavior, and interaction motion, read `.agents/skills/qivi-showcase-design/SKILL.md`. For any UI/UX, mobile, phone-keyboard, navigation, or motion work — especially the redesigned showcase in `src/next/` (served at `/next/`, intended to replace the current showcase) — read `.agents/skills/qivi-ui-ux-mobile/SKILL.md`. Both skills are linked into `.claude/skills/` for Claude Code.

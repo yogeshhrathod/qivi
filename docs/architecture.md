@@ -18,6 +18,7 @@ Qivi has two layers: a reusable React library and an interactive showcase. The s
 | `library/qivi/src/performance.ts` | Clock-driven expression/gesture/shape/character cues. |
 | `src/App.tsx` | Showcase orchestration, avatar settings, placement, and page composition. |
 | `src/components/` | Showcase controls, gallery, studio, chat, and additional UI. |
+| `next/index.html`, `src/next/` | Redesigned showcase served at `/next/`: hash-routed Chat, Scenes, Characters, Studio and Build sections sharing one persisted avatar look (`store.tsx`). Will replace the current showcase. |
 | `src/agent/responder.ts` | Abortable async event stream and mock responder. |
 | `src/agent/useQiviAgent.ts` | Conversation activity mapped to avatar state, expression, voice, and stream targets. |
 
