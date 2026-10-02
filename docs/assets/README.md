@@ -13,3 +13,7 @@ The SVG icon and transparent 512px PNG in `library/qivi/assets` come from the ac
 5. Open `/scripts/brand-preview.html?icon&size=32` to export the favicon SVG.
 
 The banner includes live particles, so exact particle positions may vary between captures. The capture page is a development tool and is not included in the production showcase build.
+
+## Light and dark themes
+
+`qivi-banner-light.png` and `qivi-banner-dark.png` are transparent browser captures; their backgrounds blend with the README page. The README selects the matching version through a `<picture>` element. Capture with `?theme=light` or `?theme=dark` and Playwright `omitBackground: true`. The showcase wordmark uses SVG `currentColor`, so it inherits the page theme without a background panel.

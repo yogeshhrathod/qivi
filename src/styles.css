@@ -196,3 +196,5 @@ html.theme-dark .msg-tone { color: #ff9c8c; }
 /* Match the wordmark in the real-avatar README banner. */
 .brand-wordmark { display: block; width: 120px; height: auto; flex-shrink: 0; }
 @media (max-width: 600px) { .brand-wordmark { width: 100px; } }
+
+.brand-wordmark { background: transparent; color: var(--ink); padding: 0; border-radius: 0; filter: none; }

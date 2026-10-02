@@ -1,6 +1,10 @@
 <div align="center">
 
-![Qivi — actual WebGL avatar captured from the React library](docs/assets/qivi-banner.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/qivi-banner-dark.png" />
+  <source media="(prefers-color-scheme: light)" srcset="docs/assets/qivi-banner-light.png" />
+  <img alt="Qivi — actual WebGL avatar captured from the React library" src="docs/assets/qivi-banner-light.png" width="1200" />
+</picture>
 
 [![CI & showcase](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml/badge.svg)](https://github.com/yogeshhrathod/qivi/actions/workflows/showcase.yml)
 ![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)

@@ -1,6 +1,9 @@
 # Qivi React library
 
-<img src="assets/qivi-wordmark.svg" alt="Qivi" width="180" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/qivi-wordmark-dark.svg" />
+  <img src="assets/qivi-wordmark.svg" alt="Qivi" width="180" />
+</picture>
 
 <img src="assets/qivi-icon.svg" alt="Qivi icon" width="80" height="80" />
 
