@@ -10,7 +10,7 @@ To preview the downloadable artifact, extract it into a folder named `qivi`, ser
 
 ## npm package
 
-Package directory: `library/qivi`. Name: `qivi`. The root workspace is private and must not be the publication target. No automated npm publishing workflow is configured. This guide does not imply that a registry release already exists.
+Package directory: `library/qivi`. Name: `@yogeshhrathod/qivi`. The root workspace is private and must not be the publication target. No automated npm publishing workflow is configured. This guide does not imply that a registry release already exists.
 
 Before an initial public release, the maintainer must select a license, add its text, and set package license metadata. Confirm package-name ownership and npm authentication separately from GitHub login.
 

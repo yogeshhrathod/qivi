@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { STATES } from "qivi";
-import type { QiviExpression, QiviState } from "qivi";
-import { QiviVoice } from "qivi";
+import { STATES } from "@yogeshhrathod/qivi";
+import type { QiviExpression, QiviState } from "@yogeshhrathod/qivi";
+import { QiviVoice } from "@yogeshhrathod/qivi";
 import { mockResponder, type Finding, type Responder } from "./responder";
 
 export interface Message {
