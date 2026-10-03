@@ -156,7 +156,8 @@ export class QiviEngine {
 
   private anchorEl: HTMLElement | null = null;
   private streamEl: HTMLElement | null = null;
-  private rect = { left: 0, top: 0, width: 1, height: 1 };
+  /** Canvas layout size plus its on-screen origin and scale (sx/sy differ from 1 under ancestor CSS transforms). */
+  private rect = { left: 0, top: 0, width: 1, height: 1, sx: 1, sy: 1 };
   private pos: V2 = { x: -1, y: -1 };
   private posVel: V2 = { x: 0, y: 0 };
   private size = 120;
@@ -508,10 +509,19 @@ export class QiviEngine {
     }
   }
 
-  private onResize = () => {
+  /** Layout size, which CSS transforms do not change; the camera and the per-frame rect must agree on it. */
+  private layoutSize() {
     const r = this.canvas.getBoundingClientRect();
-    const w = Math.max(1, r.width);
-    const h = Math.max(1, r.height);
+    return { r, w: Math.max(1, this.canvas.clientWidth || r.width), h: Math.max(1, this.canvas.clientHeight || r.height) };
+  }
+
+  /** Screen point -> canvas-local layout px. */
+  private toLocal(clientX: number, clientY: number) {
+    return { x: (clientX - this.rect.left) / this.rect.sx, y: (clientY - this.rect.top) / this.rect.sy };
+  }
+
+  private onResize = () => {
+    const { w, h } = this.layoutSize();
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.setSize(w, h, false);
     this.camera.left = -w / 2;
@@ -545,8 +555,7 @@ export class QiviEngine {
   private onPointerDown = (e: PointerEvent) => {
     this.onPointerMove(e);
     if (!this.cfg.interactive) return;
-    const x = e.clientX - this.rect.left;
-    const y = e.clientY - this.rect.top;
+    const { x, y } = this.toLocal(e.clientX, e.clientY);
     if (Math.hypot(x - this.pos.x, y - this.pos.y) < this.size * 1.15) {
       this.pokeAt(e.clientX, e.clientY, true);
       this.vel.stretch = (this.vel.stretch ?? 0) - 0.6;
@@ -563,8 +572,9 @@ export class QiviEngine {
     const S = this.size;
     const w = this.cur.width;
     const h = this.cur.height;
-    let hx = (clientX - this.rect.left - this.pos.x) / S;
-    let hy = -(clientY - this.rect.top - this.pos.y) / S;
+    const local = this.toLocal(clientX, clientY);
+    let hx = (local.x - this.pos.x) / S;
+    let hy = -(local.y - this.pos.y) / S;
     const r = Math.hypot(hx / w, hy / h);
     if (r > 1 && !force) return;
     if (r > 0.98) { hx *= 0.98 / r; hy *= 0.98 / r; }
@@ -576,8 +586,9 @@ export class QiviEngine {
   private readAnchor() {
     if (!this.anchorEl) return null;
     const r = this.anchorEl.getBoundingClientRect();
-    const m = Math.min(r.width, r.height);
-    return { x: r.left - this.rect.left + r.width / 2, y: r.top - this.rect.top + r.height / 2, size: m * (m < 140 ? 0.44 : 0.34) };
+    const c = this.toLocal(r.left + r.width / 2, r.top + r.height / 2);
+    const m = Math.min(r.width / this.rect.sx, r.height / this.rect.sy);
+    return { x: c.x, y: c.y, size: m * (m < 140 ? 0.44 : 0.34) };
   }
 
   private frame = (now: number) => {
@@ -585,8 +596,8 @@ export class QiviEngine {
     this.raf = requestAnimationFrame(this.frame);
     const dt = Math.min(0.05, (now - this.last) / 1000);
     this.last = now;
-    const r = this.canvas.getBoundingClientRect();
-    this.rect = { left: r.left, top: r.top, width: Math.max(1, r.width), height: Math.max(1, r.height) };
+    const { r, w, h } = this.layoutSize();
+    this.rect = { left: r.left, top: r.top, width: w, height: h, sx: r.width / w || 1, sy: r.height / h || 1 };
     this.update(dt, now);
     this.renderer.render(this.scene, this.camera);
   };
@@ -644,7 +655,8 @@ export class QiviEngine {
     let streamTarget: V2 | null = null;
     if (this.streamEl) {
       const r = this.streamEl.getBoundingClientRect();
-      streamTarget = { x: (r.left - this.rect.left + r.width / 2 - this.pos.x) / S, y: -(r.top - this.rect.top + r.height / 2 - this.pos.y) / S };
+      const c = this.toLocal(r.left + r.width / 2, r.top + r.height / 2);
+      streamTarget = { x: (c.x - this.pos.x) / S, y: -(c.y - this.pos.y) / S };
     }
     const probeAge = T.real - this.probe.start;
     const probeAmt = probeAge < 1.8 ? Math.sin((probeAge / 1.8) * Math.PI) : 0;
@@ -733,8 +745,7 @@ export class QiviEngine {
     this.poke.age += dt;
 
     // pointer in canvas-local px
-    const px = this.pointer.cx - this.rect.left;
-    const py = this.pointer.cy - this.rect.top;
+    const { x: px, y: py } = this.toLocal(this.pointer.cx, this.pointer.cy);
 
     // gaze: pointer > stream target > idle saccades, plus expression bias
     // idle gaze: mostly straight ahead with small, occasional glances
