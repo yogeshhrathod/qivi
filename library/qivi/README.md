@@ -9,6 +9,10 @@
 
 A particle companion for React 19, with animated states, expressions, themes, shapes, voice reactions, and a static SVG fallback. All library source, styles, and build configuration are contained in this folder. The demo and mock chat backend live outside it.
 
+<img src="https://raw.githubusercontent.com/yogeshhrathod/qivi/main/docs/assets/qivi-expressions.webp" alt="Qivi cycling through expressions (a browser capture of QiviAvatar)" width="560" />
+
+[Live showcase](https://yogeshhrathod.github.io/qivi/) · [Try it on StackBlitz](https://stackblitz.com/github/yogeshhrathod/qivi/tree/main/examples/quickstart?file=src%2FApp.tsx) · [OpenAI Realtime example](https://github.com/yogeshhrathod/qivi/tree/main/examples/openai-realtime)
+
 ## Use in another project
 
 Install the package and its peer dependencies from npm:
